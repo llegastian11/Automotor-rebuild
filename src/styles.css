@@ -3889,7 +3889,7 @@ main,
 
 .source-dashboard {
   position: relative;
-  min-height: 218px;
+  min-height: 306px;
   overflow: hidden;
   border: 1px solid rgba(18, 21, 27, 0.08);
   border-radius: 24px;
@@ -4012,7 +4012,7 @@ main,
 }
 
 .status-card.is-neutral {
-  top: 158px;
+  top: 154px;
   --status-color: #f0a400;
 }
 
@@ -4039,7 +4039,7 @@ main,
 .source-next {
   position: absolute;
   right: 30px;
-  bottom: 24px;
+  bottom: 22px;
   z-index: 3;
   padding: 10px 14px;
   border-radius: 999px;
