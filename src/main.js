@@ -54,40 +54,40 @@ const sourceGroups = [
     title: 'Papeletas, multas y transporte',
     description: 'Accesos preservados para revisar infracciones en Lima, Callao, SUTRAN, ATU y municipalidades.',
     links: [
-      ['SAT Lima', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
-      ['Callao', 'https://pagopapeletascallao.pe/'],
-      ['SUTRAN record', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/'],
-      ['Verifica infraccion SUTRAN', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/verifica-tu-infraccion/'],
-      ['ATU', 'https://pasarela.atu.gob.pe/#'],
-      ['Foto papeletas PIT', 'http://www.pit.gob.pe/pit2007/EstadoCuentaVelocidad.aspx'],
-      ['SAT Trujillo', 'https://satt.gob.pe/servicios/record-de-infracciones'],
-      ['SAT Cajamarca', 'https://www.satcajamarca.gob.pe/#/'],
-      ['Arequipa', 'https://www.muniarequipa.gob.pe/oficina-virtual/c0nInfrPermisos/faltas/papeletas.php'],
-      ['Tacna', 'https://www.munitacna.gob.pe/pagina/sf/servicios/papeletas'],
+      ['SAT Lima', 'Papeletas, multas e impuesto vehicular en Lima.', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+      ['Callao', 'Consulta y pago de papeletas del Callao.', 'https://pagopapeletascallao.pe/'],
+      ['SUTRAN record', 'Record de infracciones de transporte nacional.', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/'],
+      ['Verifica infraccion SUTRAN', 'Detalle de infracciones registradas por SUTRAN.', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/verifica-tu-infraccion/'],
+      ['ATU', 'Papeletas y obligaciones de transporte urbano.', 'https://pasarela.atu.gob.pe/#'],
+      ['Foto papeletas PIT', 'Evidencia fotografica de papeletas registradas.', 'http://www.pit.gob.pe/pit2007/EstadoCuentaVelocidad.aspx'],
+      ['SAT Trujillo', 'Record de infracciones municipales en Trujillo.', 'https://satt.gob.pe/servicios/record-de-infracciones'],
+      ['SAT Cajamarca', 'Servicios tributarios y papeletas de Cajamarca.', 'https://www.satcajamarca.gob.pe/#/'],
+      ['Arequipa', 'Consulta municipal de infracciones en Arequipa.', 'https://www.muniarequipa.gob.pe/oficina-virtual/c0nInfrPermisos/faltas/papeletas.php'],
+      ['Tacna', 'Papeletas y servicios municipales de Tacna.', 'https://www.munitacna.gob.pe/pagina/sf/servicios/papeletas'],
     ],
   },
   {
     title: 'SOAT, revision tecnica y GNV',
     description: 'Validaciones de vigencia, talleres, revisiones y datos asociados al estado tecnico del vehiculo.',
     links: [
-      ['APESEG SOAT', 'https://www.apeseg.org.pe/consultas-soat/'],
-      ['SBS reporte SOAT', 'https://servicios.sbs.gob.pe/reportesoat/'],
-      ['Consulta CITV MTC', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
-      ['Talleres GNV MINEM', 'https://fise.minem.gob.pe:23308/consulta-taller/pages/consultaTaller/inicio'],
-      ['Infogas', 'https://vh.infogas.com.pe/'],
-      ['Estado de placa', 'https://www.placas.pe/#/home/verificarEstadoPlaca'],
+      ['APESEG SOAT', 'Vigencia de SOAT por placa y aseguradora.', 'https://www.apeseg.org.pe/consultas-soat/'],
+      ['SBS reporte SOAT', 'Reporte de seguro obligatorio desde SBS.', 'https://servicios.sbs.gob.pe/reportesoat/'],
+      ['Consulta CITV MTC', 'Estado de inspeccion tecnica vehicular.', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
+      ['Talleres GNV MINEM', 'Talleres autorizados para conversion o revision GNV.', 'https://fise.minem.gob.pe:23308/consulta-taller/pages/consultaTaller/inicio'],
+      ['Infogas', 'Vigencia de tanque y datos del sistema GNV.', 'https://vh.infogas.com.pe/'],
+      ['Estado de placa', 'Verificacion de tramite y estado de placa.', 'https://www.placas.pe/#/home/verificarEstadoPlaca'],
     ],
   },
   {
     title: 'Propiedad, gravamenes y antecedentes',
     description: 'Fuentes para revisar registros SUNARP, seguimiento documental, ordenes y antecedentes vinculados.',
     links: [
-      ['Consulta SUNARP', 'https://consultavehicular.sunarp.gob.pe/'],
-      ['Publicidad registral', 'https://sprl.sunarp.gob.pe/sprl/ingreso'],
-      ['Siguelo SUNARP', 'https://sigueloplus.sunarp.gob.pe/siguelo/'],
-      ['TIVE SUNARP', 'https://www.sunarp.gob.pe/serviciosenlinea/portal/tarjeta-de-identificacion-vehicular-electronica-tive.html'],
-      ['Lunas polarizadas PNP', 'https://sistemas.policia.gob.pe/consultalunas/ConsultarServicioLunas'],
-      ['Consulta PVR PNP', 'https://sistemas1.policia.gob.pe/ConsultaPVR/ErrorSesion.aspx'],
+      ['Consulta SUNARP', 'Propietario, caracteristicas y datos registrales.', 'https://consultavehicular.sunarp.gob.pe/'],
+      ['Publicidad registral', 'Partidas, certificados y publicidad registral.', 'https://sprl.sunarp.gob.pe/sprl/ingreso'],
+      ['Siguelo SUNARP', 'Seguimiento de titulos y tramites registrales.', 'https://sigueloplus.sunarp.gob.pe/siguelo/'],
+      ['TIVE SUNARP', 'Tarjeta de identificacion vehicular electronica.', 'https://www.sunarp.gob.pe/serviciosenlinea/portal/tarjeta-de-identificacion-vehicular-electronica-tive.html'],
+      ['Lunas polarizadas PNP', 'Consulta de permiso para lunas polarizadas.', 'https://sistemas.policia.gob.pe/consultalunas/ConsultarServicioLunas'],
+      ['Consulta PVR PNP', 'Validacion policial de requisitorias vehiculares.', 'https://sistemas1.policia.gob.pe/ConsultaPVR/ErrorSesion.aspx'],
     ],
   },
 ]
@@ -116,7 +116,7 @@ const serviceNav = [
     group: 'Consulta y documentos',
   },
   {
-    label: 'SOAT electronico',
+    label: 'SOAT electrónico',
     detail: 'Cotiza y revisa cobertura obligatoria.',
     href: '/soat-electronico/',
     icon: 'shield',
@@ -271,7 +271,7 @@ function renderHeader() {
     ['Plaquealo', plaquealoUrl, 'grid'],
     ['MiGarage', plaquealoUrl, 'shield'],
     ['Planes', plaquealoUrl, 'tag'],
-    ['Vehiculos', plaquealoUrl, 'grid'],
+    ['Vehículos', plaquealoUrl, 'grid'],
   ]
   return `
     <header class="header">
@@ -280,19 +280,19 @@ function renderHeader() {
         <a class="nav-plaquealo" href="${plaquealoUrl}">Plaquealo</a>
         <a href="${plaquealoUrl}">MiGarage</a>
         <a href="${plaquealoUrl}">Planes</a>
-        <a href="${plaquealoUrl}">Vehiculos</a>
-        <div class="nav-item">
+        <a href="${plaquealoUrl}">Vehículos</a>
+        <div class="nav-item services-menu">
           <button class="services-trigger" type="button" aria-expanded="false">Otros servicios <span aria-hidden="true"></span></button>
           ${renderServiceMega()}
         </div>
-        <div class="nav-item">
+        <div class="nav-item blog-menu">
           <button class="blog-trigger" type="button" aria-expanded="false">Blog <span aria-hidden="true"></span></button>
           ${renderBlogDropdown()}
         </div>
       </nav>
       <div class="header-actions">
         <a class="header-login" href="${navLink('/contacto/')}">${iconGlyph('user')}<span>Ingresar</span></a>
-        <a class="header-publish" href="https://seminuevos.automotor.pe/">${iconGlyph('car')}<span>Publicar vehiculo</span><b>${iconGlyph('plus')}</b></a>
+        <a class="header-publish" href="https://seminuevos.automotor.pe/">${iconGlyph('car')}<span>Publicar vehículo</span><b>${iconGlyph('plus')}</b></a>
       </div>
       <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer"><span></span><span></span></button>
       <aside class="mobile-drawer" id="mobile-drawer" aria-label="Menu movil">
@@ -309,7 +309,7 @@ function renderHeader() {
           ${blogLinks.map(([label, path]) => `<a href="${navLink(path)}">${iconGlyph('book')}<span>${label}</span></a>`).join('')}
         </nav>
         <div class="mobile-drawer-actions">
-          <a class="mobile-publish" href="https://seminuevos.automotor.pe/">Publicar vehiculo</a>
+          <a class="mobile-publish" href="https://seminuevos.automotor.pe/">Publicar vehículo</a>
           <a class="mobile-login" href="${navLink('/contacto/')}">Continuar con Google</a>
         </div>
         <div class="mobile-legal"><span>Legal</span><span>Privacidad</span><span>Cookies</span></div>
@@ -642,6 +642,10 @@ function renderConsultationSources(summary, tags) {
           <div class="source-next">Fuentes oficiales debajo</div>
         </div>
       </div>
+      <article class="consult-context">
+        <p>Con <strong>consulta vehicular</strong>, accede en segundos a informacion completa de vehiculos con placa peruana: multas, papeletas, requisitorias, revision tecnica, historial de dueños, gravamenes, deudas, impedimentos y accidentes reportados por el SOAT.</p>
+        <p>Para un analisis mas profundo, solicita el <a href="${routeFor('/consulta-vehicular/')}">Reporte Vehicular Detallado</a> con asesoria personalizada.</p>
+      </article>
       <div class="official-board" aria-label="Fuentes principales">
         ${sourceLinks
           .map(
@@ -755,7 +759,7 @@ function renderConsultationPanels() {
                 <div class="directory-content">
                   <p>${group.description}</p>
                   <div class="directory-links">
-                    ${group.links.map(([label, href], linkIndex) => `<a class="directory-link-card source-group-${index}" href="${href}" target="_blank" rel="noreferrer"><small>${String(linkIndex + 1).padStart(2, '0')}</small><strong>${label}</strong><span>Abrir</span></a>`).join('')}
+                    ${group.links.map(([label, description, href], linkIndex) => `<a class="directory-link-card source-group-${index}" href="${href}" target="_blank" rel="noreferrer"><small>${String(linkIndex + 1).padStart(2, '0')}</small><strong>${label}</strong><p>${description}</p><span>Abrir</span></a>`).join('')}
                   </div>
                 </div>
               </article>

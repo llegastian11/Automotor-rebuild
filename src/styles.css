@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+
 :root {
   --red: #e31b23;
   --ink: #151515;
@@ -3580,7 +3582,7 @@ main,
   --group-soft: rgba(229, 29, 39, 0.08);
   position: relative;
   display: grid !important;
-  min-height: 150px !important;
+  min-height: 182px !important;
   align-content: space-between;
   overflow: hidden;
   border-color: rgba(18, 21, 27, 0.08) !important;
@@ -3620,6 +3622,16 @@ main,
   color: var(--ink);
   font-size: 20px;
   line-height: 1.08;
+}
+
+.directory-link-card p {
+  position: relative;
+  max-width: 23ch;
+  margin: 8px 0 14px !important;
+  color: #667085;
+  font-size: 13px !important;
+  font-weight: 650;
+  line-height: 1.35 !important;
 }
 
 .directory-link-card span {
@@ -4039,7 +4051,7 @@ main,
 .source-next {
   position: absolute;
   right: 30px;
-  bottom: 22px;
+  bottom: 12px;
   z-index: 3;
   padding: 10px 14px;
   border-radius: 999px;
@@ -4050,6 +4062,35 @@ main,
   letter-spacing: 0.04em;
   text-transform: uppercase;
   box-shadow: 0 14px 28px rgba(237, 28, 36, 0.2);
+}
+
+.consult-context {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 16px;
+  border: 1px solid rgba(18, 21, 27, 0.08);
+  border-left: 4px solid var(--red);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 18px 22px;
+  box-shadow: 0 14px 36px rgba(18, 21, 27, 0.045);
+}
+
+.consult-context p {
+  max-width: 1000px;
+  margin: 0;
+  color: #555e6d;
+  font-size: 15px;
+  line-height: 1.56;
+}
+
+.consult-context strong {
+  color: #242832;
+}
+
+.consult-context a {
+  color: var(--red);
+  font-weight: 900;
 }
 
 .source-next::after {
@@ -5479,5 +5520,467 @@ main,
   .whatsapp-float {
     animation: none !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* Exact Plaquealo desktop header pass */
+@media (min-width: 981px) {
+  body {
+    font-family: Inter, system-ui, -apple-system, "system-ui", "Segoe UI", sans-serif;
+  }
+
+  .header {
+    position: fixed !important;
+    top: 12px !important;
+    left: 50% !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    width: min(1180px, calc(100vw - 32px)) !important;
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, 0.93) !important;
+    padding: 0 10px 0 16px !important;
+    box-shadow: 0 16px 42px rgba(23, 23, 25, 0.13) !important;
+    color: #171719 !important;
+    font-family: Inter, system-ui, -apple-system, "system-ui", "Segoe UI", sans-serif !important;
+    transform: translateX(-50%) !important;
+    backdrop-filter: blur(16px);
+    pointer-events: auto !important;
+    animation: none !important;
+  }
+
+  .header .logo {
+    display: flex !important;
+    flex: 0 0 190px !important;
+    width: 190px !important;
+    height: 29px !important;
+    align-items: center !important;
+    margin: 0 !important;
+  }
+
+  .header .logo img {
+    display: block !important;
+    width: 190px !important;
+    height: auto !important;
+  }
+
+  .desktop-nav {
+    display: flex !important;
+    flex: 0 0 491px !important;
+    width: 491px !important;
+    height: 42px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .desktop-nav > a,
+  .nav-item > button {
+    position: relative !important;
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    color: #55545a !important;
+    font-family: Inter, system-ui, -apple-system, "system-ui", "Segoe UI", sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 15px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    transform: none !important;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease !important;
+  }
+
+  .desktop-nav > a:not(.nav-plaquealo) {
+    height: 15px !important;
+    padding: 0 !important;
+  }
+
+  .desktop-nav .nav-plaquealo {
+    display: block !important;
+    width: 86px !important;
+    height: 35px !important;
+    border-radius: 11px !important;
+    background: #c41e1e !important;
+    padding: 10px 14px !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 15px !important;
+    text-align: center !important;
+    box-shadow: 0 7px 16px rgba(196, 30, 30, 0.18) !important;
+  }
+
+  .desktop-nav .nav-plaquealo:hover {
+    background: #c41e1e !important;
+    color: #fff !important;
+    box-shadow: 0 10px 20px rgba(196, 30, 30, 0.22) !important;
+    transform: none !important;
+  }
+
+  .nav-item {
+    position: relative !important;
+    display: block !important;
+    flex: 0 0 auto !important;
+    height: 42px !important;
+  }
+
+  .services-menu {
+    width: 125px !important;
+    flex-basis: 125px !important;
+  }
+
+  .blog-menu {
+    width: 26px !important;
+    flex-basis: 26px !important;
+  }
+
+  .header .desktop-nav .services-menu .services-trigger {
+    display: flex !important;
+    box-sizing: border-box !important;
+    width: 125px !important;
+    min-width: 125px !important;
+    max-width: 125px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    border-radius: 9px !important;
+    padding: 0 8px !important;
+  }
+
+  .header .desktop-nav .blog-menu .blog-trigger {
+    display: block !important;
+    width: 26px !important;
+    min-width: 26px !important;
+    max-width: 26px !important;
+    height: 15px !important;
+    min-height: 15px !important;
+    max-height: 15px !important;
+    margin-top: 13px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .blog-trigger span {
+    display: none !important;
+  }
+
+  .services-trigger span {
+    width: 15px !important;
+    height: 15px !important;
+    margin-left: 0 !important;
+    border: 0 !important;
+    transform: none !important;
+  }
+
+  .services-trigger span::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 3px auto 0;
+    border-right: 1.8px solid currentColor;
+    border-bottom: 1.8px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 180ms ease;
+  }
+
+  .nav-item:hover .services-trigger,
+  .nav-item:focus-within .services-trigger,
+  .nav-item.is-open .services-trigger {
+    background: #f0ece7 !important;
+    color: #55545a !important;
+  }
+
+  .nav-item:hover .services-trigger span::before,
+  .nav-item:focus-within .services-trigger span::before,
+  .nav-item.is-open .services-trigger span::before {
+    transform: rotate(225deg) translate(-1px, -1px);
+  }
+
+  .desktop-nav > a:hover,
+  .blog-trigger:hover,
+  .nav-item:focus-within .blog-trigger,
+  .nav-item.is-open .blog-trigger {
+    background: transparent !important;
+    color: #171719 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .services-dropdown {
+    position: absolute !important;
+    top: 62px !important;
+    left: 50% !important;
+    z-index: 1010 !important;
+    display: block !important;
+    width: 670px !important;
+    height: 296px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(23, 23, 25, 0.08) !important;
+    border-radius: 20px !important;
+    background: #fff !important;
+    padding: 0 !important;
+    box-shadow: 0 28px 70px rgba(23, 23, 25, 0.16) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translate(-56%, 8px) !important;
+    transform-origin: 50% 0 !important;
+    transition:
+      opacity 200ms ease,
+      visibility 200ms ease,
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  .nav-item:hover .services-dropdown,
+  .nav-item:focus-within .services-dropdown,
+  .nav-item.is-open .services-dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translate(-56%, 0) !important;
+  }
+
+  .services-dropdown::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -18px !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 18px !important;
+  }
+
+  .mega-intro {
+    display: flex !important;
+    height: 54px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    margin: 0 !important;
+    background: #faf8f5 !important;
+    padding: 18px 20px !important;
+  }
+
+  .mega-intro strong {
+    display: block !important;
+    color: #171719 !important;
+    font-family: Inter, system-ui, -apple-system, "system-ui", "Segoe UI", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+  }
+
+  .mega-intro span {
+    display: block !important;
+    color: #66656a !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 14px !important;
+  }
+
+  .mega-columns {
+    display: grid !important;
+    grid-template-columns: 284px 384px !important;
+    gap: 0 !important;
+    width: 668px !important;
+    height: 240px !important;
+    padding: 0 !important;
+  }
+
+  .mega-column {
+    display: block !important;
+    height: 240px !important;
+    padding: 13px 17px !important;
+  }
+
+  .mega-column p {
+    margin: 0 9px 8px !important;
+    color: #8b8784 !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    line-height: 11px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  .service-nav-item {
+    display: grid !important;
+    grid-template-columns: 37px 1fr !important;
+    gap: 12px !important;
+    width: 251px !important;
+    min-height: 52px !important;
+    align-items: center !important;
+    border-radius: 11px !important;
+    padding: 8px 10px !important;
+    color: #55545a !important;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease !important;
+  }
+
+  .mega-column:nth-child(2) .service-nav-item {
+    width: 349px !important;
+  }
+
+  .service-nav-item span {
+    grid-column: 1 !important;
+    grid-row: 1 / 3 !important;
+    display: grid !important;
+    width: 34px !important;
+    height: 34px !important;
+    place-items: center !important;
+    border-radius: 10px !important;
+    background: #fff0ee !important;
+    color: #c41e1e !important;
+  }
+
+  .service-nav-item svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .service-nav-item strong {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    align-self: end !important;
+    color: #171719 !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    line-height: 16px !important;
+  }
+
+  .service-nav-item small {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: block !important;
+    overflow: hidden !important;
+    color: #66656a !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    line-height: 15px !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .service-nav-item:hover {
+    background: #faf8f5 !important;
+    color: #c41e1e !important;
+    transform: none !important;
+  }
+
+  .blog-dropdown {
+    top: 62px !important;
+    width: 260px !important;
+    border-radius: 20px !important;
+    transform: translate(-50%, 8px) !important;
+  }
+
+  .nav-item:hover .blog-dropdown,
+  .nav-item:focus-within .blog-dropdown,
+  .nav-item.is-open .blog-dropdown {
+    transform: translate(-50%, 0) !important;
+  }
+
+  .header-actions {
+    display: flex !important;
+    flex: 0 0 348px !important;
+    width: 348px !important;
+    height: 46px !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+  }
+
+  .header-login {
+    display: flex !important;
+    width: 119px !important;
+    height: 46px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+    padding: 0 13px !important;
+    color: #55545a !important;
+    font-size: 16px !important;
+    font-weight: 750 !important;
+    line-height: 19px !important;
+    box-shadow: none !important;
+  }
+
+  .header-login svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .header-publish {
+    display: flex !important;
+    width: 221px !important;
+    min-width: 221px !important;
+    height: 46px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+    background: #171719 !important;
+    padding: 0 12px 0 15px !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 750 !important;
+    line-height: 19px !important;
+    box-shadow: 0 9px 20px rgba(23, 23, 25, 0.14) !important;
+  }
+
+  .header-publish > svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .header-publish b {
+    display: grid !important;
+    width: 31px !important;
+    height: 31px !important;
+    place-items: center !important;
+    border-radius: 9px !important;
+    background: #d11d21 !important;
+  }
+
+  .header-publish b svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .header-login:hover,
+  .header-publish:hover {
+    transform: none !important;
   }
 }
