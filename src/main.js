@@ -173,13 +173,13 @@ function renderHeader() {
   return `
     <header class="header">
       <a class="logo" href="${routeFor('/')}" aria-label="Automotor Peru"><img src="${assetPath('/automotor-logo.png')}" alt="Automotor.pe" /></a>
-      <nav class="desktop-nav" aria-label="Navegacion principal">
+      <nav class="desktop-nav" id="primary-nav" aria-label="Navegacion principal">
         <div class="nav-item">
-          <button type="button">Servicios <span aria-hidden="true"></span></button>
+          <button type="button" aria-expanded="false">Servicios <span aria-hidden="true"></span></button>
           <div class="dropdown">${renderMenu(services)}</div>
         </div>
         <div class="nav-item">
-          <button type="button">Blog <span aria-hidden="true"></span></button>
+          <button type="button" aria-expanded="false">Blog <span aria-hidden="true"></span></button>
           <div class="dropdown small">${renderMenu(blogLinks)}</div>
         </div>
         <a href="https://seminuevos.automotor.pe/">Seminuevos</a>
@@ -189,7 +189,7 @@ function renderHeader() {
         <label><span>Buscar</span><input name="q" placeholder="Buscar..." /></label>
         <button aria-label="Buscar" type="submit">Buscar</button>
       </form>
-      <button class="menu-button" type="button" aria-label="Abrir menu">Menu</button>
+      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     </header>
   `
 }
@@ -778,12 +778,36 @@ function render() {
 
   document.querySelector('#app').innerHTML = `${renderHeader()}${view}${renderFooter()}`
   setMeta(route, viewTitle)
-  document.querySelector('.menu-button').addEventListener('click', () => document.body.classList.toggle('menu-open'))
-  document.querySelectorAll('a[href^="/"]').forEach((link) => {
+  const menuButton = document.querySelector('.menu-button')
+  const syncMobileMenuPosition = () => {
+    const header = document.querySelector('.header')
+    const bottom = header ? Math.round(header.getBoundingClientRect().bottom + 10) : 82
+    document.documentElement.style.setProperty('--mobile-header-bottom', `${bottom}px`)
+  }
+  syncMobileMenuPosition()
+  window.addEventListener('resize', syncMobileMenuPosition, { passive: true })
+  menuButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    syncMobileMenuPosition()
+    const isOpen = document.body.classList.toggle('menu-open')
+    menuButton.setAttribute('aria-expanded', String(isOpen))
+    if (isOpen) {
+      document.querySelector('.nav-item')?.classList.add('is-open')
+      document.querySelector('.nav-item > button')?.setAttribute('aria-expanded', 'true')
+    } else {
+      document.querySelectorAll('.nav-item').forEach((item) => {
+        item.classList.remove('is-open')
+        item.querySelector('button')?.setAttribute('aria-expanded', 'false')
+      })
+    }
+  })
+  document.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (event) => {
       const url = new URL(link.href)
       if (url.origin !== window.location.origin) return
       event.preventDefault()
+      document.body.classList.remove('menu-open')
+      menuButton.setAttribute('aria-expanded', 'false')
       navigate(stripBasePath(url.pathname))
     })
   })
@@ -802,17 +826,40 @@ function initInteractions() {
   window.addEventListener('scroll', syncHeaderState, { passive: true })
   document.querySelectorAll('.nav-item').forEach((item) => {
     let closeTimer
+    const button = item.querySelector('button')
     const open = () => {
       window.clearTimeout(closeTimer)
       item.classList.add('is-open')
+      button?.setAttribute('aria-expanded', 'true')
     }
     const close = () => {
-      closeTimer = window.setTimeout(() => item.classList.remove('is-open'), 280)
+      closeTimer = window.setTimeout(() => {
+        item.classList.remove('is-open')
+        button?.setAttribute('aria-expanded', 'false')
+      }, 280)
     }
-    item.addEventListener('pointerenter', open)
-    item.addEventListener('pointerleave', close)
-    item.addEventListener('focusin', open)
-    item.addEventListener('focusout', close)
+    button?.addEventListener('click', (event) => {
+      if (!window.matchMedia('(max-width: 1120px)').matches) return
+      event.preventDefault()
+      event.stopPropagation()
+      const next = !item.classList.contains('is-open')
+      document.querySelectorAll('.nav-item').forEach((other) => {
+        other.classList.toggle('is-open', other === item && next)
+        other.querySelector('button')?.setAttribute('aria-expanded', String(other === item && next))
+      })
+    })
+    item.addEventListener('pointerenter', () => {
+      if (!window.matchMedia('(max-width: 1120px)').matches) open()
+    })
+    item.addEventListener('pointerleave', () => {
+      if (!window.matchMedia('(max-width: 1120px)').matches) close()
+    })
+    item.addEventListener('focusin', () => {
+      if (!window.matchMedia('(max-width: 1120px)').matches) open()
+    })
+    item.addEventListener('focusout', () => {
+      if (!window.matchMedia('(max-width: 1120px)').matches) close()
+    })
   })
   document.querySelectorAll('.source-filter').forEach((button) => {
     button.addEventListener('click', () => {
