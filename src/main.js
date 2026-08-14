@@ -3,6 +3,9 @@ import './styles.css'
 
 const assetBase = import.meta.env.BASE_URL || '/'
 const basePath = assetBase === '/' ? '' : assetBase.replace(/\/$/, '')
+const plaquealoUrl = 'https://llegastian11.github.io/automotor-prototipo/#/plaquealo'
+const whatsappPhone = '51923804533'
+const whatsappMessage = 'Hola Automotor, tengo dudas y necesito ayuda.'
 
 function assetPath(path = '') {
   if (!path || path.startsWith('http') || path.startsWith('data:')) return path
@@ -97,6 +100,44 @@ const services = [
   ['Seguro vehicular', '/seguro-vehicular/'],
 ]
 
+const serviceNav = [
+  {
+    label: 'Consulta vehicular',
+    detail: 'Accede gratis a fuentes oficiales.',
+    href: '/consulta-vehicular/',
+    icon: 'search',
+    group: 'Consulta y documentos',
+  },
+  {
+    label: 'Reporte Infocorp',
+    detail: 'Historial crediticio y riesgo comercial.',
+    href: '/reporte-infocorp/',
+    icon: 'file',
+    group: 'Consulta y documentos',
+  },
+  {
+    label: 'SOAT electronico',
+    detail: 'Cotiza y revisa cobertura obligatoria.',
+    href: '/soat-electronico/',
+    icon: 'shield',
+    group: 'Proteccion y seguridad',
+  },
+  {
+    label: 'Seguro vehicular',
+    detail: 'Protege tu vehiculo con aseguradoras.',
+    href: '/seguro-vehicular/',
+    icon: 'shield',
+    group: 'Proteccion y seguridad',
+  },
+  {
+    label: 'GPS vehicular',
+    detail: 'Seguridad, rastreo y monitoreo.',
+    href: '/gps-vehicular/',
+    icon: 'pin',
+    group: 'Proteccion y seguridad',
+  },
+]
+
 const blogLinks = [
   ['Lanzamientos', '/lanzamientos/'],
   ['Historia', '/categoria/historia-automotriz/'],
@@ -169,27 +210,110 @@ function renderMenu(items) {
   return items.map(([label, path]) => `<a href="${navLink(path)}">${label}</a>`).join('')
 }
 
+function iconGlyph(name) {
+  const icons = {
+    search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path></svg>',
+    shield: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"></path><path d="m9 12 2 2 4-5"></path></svg>',
+    file: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7V3Z"></path><path d="M14 3v5h5"></path><path d="M10 13h6"></path><path d="M10 17h5"></path></svg>',
+    pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg>',
+    tag: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V4h7l9 9-7 7-9-9Z"></path><circle cx="8" cy="8" r="1"></circle></svg>',
+    grid: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v5H5z"></path><path d="M14 5h5v5h-5z"></path><path d="M5 14h5v5H5z"></path><path d="M14 14h5v5h-5z"></path></svg>',
+    book: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7a4 4 0 0 1 4 4v10a4 4 0 0 0-4-4H4V5Z"></path><path d="M20 5h-5a4 4 0 0 0-4 4"></path></svg>',
+    user: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>',
+    car: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16h14l-2-6H7l-2 6Z"></path><path d="M7 16v3"></path><path d="M17 16v3"></path><circle cx="8" cy="19" r="1"></circle><circle cx="16" cy="19" r="1"></circle></svg>',
+    plus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>',
+  }
+  return icons[name] || icons.file
+}
+
+function renderServiceMega() {
+  const groups = ['Consulta y documentos', 'Proteccion y seguridad']
+  return `
+    <div class="services-dropdown" role="menu">
+      <div class="mega-intro">
+        <strong>Servicios Automotor</strong>
+        <span>Herramientas para comprar, proteger y administrar vehiculos.</span>
+      </div>
+      <div class="mega-columns">
+        ${groups.map((group) => `
+          <div class="mega-column">
+            <p>${group}</p>
+            ${serviceNav.filter((item) => item.group === group).map((item) => `
+              <a class="service-nav-item" href="${navLink(item.href)}" role="menuitem">
+                <span>${iconGlyph(item.icon)}</span>
+                <strong>${item.label}</strong>
+                <small>${item.detail}</small>
+              </a>
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `
+}
+
+function renderBlogDropdown() {
+  return `
+    <div class="blog-dropdown" role="menu">
+      ${blogLinks.map(([label, path]) => `
+        <a class="blog-nav-item" href="${navLink(path)}" role="menuitem">
+          <span>${label.slice(0, 2).toUpperCase()}</span>
+          <strong>${label}</strong>
+          <small>${label === 'Historia' ? 'Historia automotriz' : `Categoria ${label.toLowerCase()}`}</small>
+        </a>
+      `).join('')}
+    </div>
+  `
+}
+
 function renderHeader() {
+  const mobileServiceItems = [
+    ['Plaquealo', plaquealoUrl, 'grid'],
+    ['MiGarage', plaquealoUrl, 'shield'],
+    ['Planes', plaquealoUrl, 'tag'],
+    ['Vehiculos', plaquealoUrl, 'grid'],
+  ]
   return `
     <header class="header">
       <a class="logo" href="${routeFor('/')}" aria-label="Automotor Peru"><img src="${assetPath('/automotor-logo.png')}" alt="Automotor.pe" /></a>
       <nav class="desktop-nav" id="primary-nav" aria-label="Navegacion principal">
+        <a class="nav-plaquealo" href="${plaquealoUrl}">Plaquealo</a>
+        <a href="${plaquealoUrl}">MiGarage</a>
+        <a href="${plaquealoUrl}">Planes</a>
+        <a href="${plaquealoUrl}">Vehiculos</a>
         <div class="nav-item">
-          <button type="button" aria-expanded="false">Servicios <span aria-hidden="true"></span></button>
-          <div class="dropdown">${renderMenu(services)}</div>
+          <button class="services-trigger" type="button" aria-expanded="false">Otros servicios <span aria-hidden="true"></span></button>
+          ${renderServiceMega()}
         </div>
         <div class="nav-item">
-          <button type="button" aria-expanded="false">Blog <span aria-hidden="true"></span></button>
-          <div class="dropdown small">${renderMenu(blogLinks)}</div>
+          <button class="blog-trigger" type="button" aria-expanded="false">Blog <span aria-hidden="true"></span></button>
+          ${renderBlogDropdown()}
         </div>
-        <a href="https://seminuevos.automotor.pe/">Seminuevos</a>
-        <a href="${navLink('/contacto/')}">Contacto</a>
       </nav>
-      <form class="search" id="search-form">
-        <label><span>Buscar</span><input name="q" placeholder="Buscar..." /></label>
-        <button aria-label="Buscar" type="submit">Buscar</button>
-      </form>
-      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <div class="header-actions">
+        <a class="header-login" href="${navLink('/contacto/')}">${iconGlyph('user')}<span>Ingresar</span></a>
+        <a class="header-publish" href="https://seminuevos.automotor.pe/">${iconGlyph('car')}<span>Publicar vehiculo</span><b>${iconGlyph('plus')}</b></a>
+      </div>
+      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer"><span></span><span></span></button>
+      <aside class="mobile-drawer" id="mobile-drawer" aria-label="Menu movil">
+        <div class="mobile-drawer-head">
+          <a class="mobile-brand" href="${routeFor('/')}" aria-label="Automotor Peru"><img src="${assetPath('/automotor-logo.png')}" alt="Automotor.pe" /></a>
+          <button class="mobile-close" type="button" aria-label="Cerrar menu"><span></span><span></span></button>
+        </div>
+        <div class="mobile-rule"></div>
+        <nav class="mobile-links">
+          ${mobileServiceItems.map(([label, href, icon], index) => `<a class="${index === 0 ? 'mobile-plaquealo' : ''}" href="${href}">${iconGlyph(icon)}<span>${label}</span></a>`).join('')}
+          <p>Otros servicios</p>
+          ${serviceNav.map((item) => `<a href="${navLink(item.href)}">${iconGlyph(item.icon)}<span>${item.label}</span></a>`).join('')}
+          <p>Blog</p>
+          ${blogLinks.map(([label, path]) => `<a href="${navLink(path)}">${iconGlyph('book')}<span>${label}</span></a>`).join('')}
+        </nav>
+        <div class="mobile-drawer-actions">
+          <a class="mobile-publish" href="https://seminuevos.automotor.pe/">Publicar vehiculo</a>
+          <a class="mobile-login" href="${navLink('/contacto/')}">Continuar con Google</a>
+        </div>
+        <div class="mobile-legal"><span>Legal</span><span>Privacidad</span><span>Cookies</span></div>
+      </aside>
     </header>
   `
 }
@@ -749,6 +873,19 @@ function renderFooter() {
   `
 }
 
+function renderWhatsappButton() {
+  const href = `https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent(whatsappMessage)}`
+  return `
+    <a class="whatsapp-float" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="Escribir a Automotor por WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 3.5A12.4 12.4 0 0 0 5.3 22.1L4 28l6-1.5A12.4 12.4 0 1 0 16 3.5Z"></path>
+        <path d="M11.4 10.2c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.8.1-1.2.6-.4.4-1.5 1.5-1.5 3.6s1.6 4.2 1.8 4.5c.2.3 3.1 5 7.7 6.7 3.8 1.5 4.6 1.2 5.4 1.1.8-.1 2.6-1.1 2.9-2.1.4-1 .4-1.9.3-2.1-.1-.2-.4-.3-.8-.5l-2.8-1.4c-.4-.1-.7-.2-1 .2-.3.5-1.1 1.4-1.4 1.7-.3.3-.5.3-1 .1-.4-.2-1.9-.7-3.6-2.2-1.3-1.2-2.2-2.6-2.5-3.1-.3-.4 0-.7.2-.9l.7-.8c.2-.3.3-.5.5-.8.1-.3.1-.6 0-.8l-1.3-3.1Z"></path>
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+  `
+}
+
 function currentRoute() {
   if (window.location.hash.startsWith('#/')) {
     const clean = window.location.hash.slice(1)
@@ -776,7 +913,7 @@ function render() {
   else if (entryByPath.has(route)) { viewTitle = entryByPath.get(route).title; view = renderEntry(entryByPath.get(route)) }
   else { viewTitle = 'Contenido no encontrado'; view = renderNotFound() }
 
-  document.querySelector('#app').innerHTML = `${renderHeader()}${view}${renderFooter()}`
+  document.querySelector('#app').innerHTML = `${renderHeader()}${view}${renderFooter()}${renderWhatsappButton()}`
   setMeta(route, viewTitle)
   const menuButton = document.querySelector('.menu-button')
   const syncMobileMenuPosition = () => {
@@ -801,6 +938,14 @@ function render() {
       })
     }
   })
+  document.querySelector('.mobile-close')?.addEventListener('click', () => {
+    document.body.classList.remove('menu-open')
+    menuButton.setAttribute('aria-expanded', 'false')
+    document.querySelectorAll('.nav-item').forEach((item) => {
+      item.classList.remove('is-open')
+      item.querySelector('button')?.setAttribute('aria-expanded', 'false')
+    })
+  })
   document.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', (event) => {
       const url = new URL(link.href)
@@ -811,7 +956,7 @@ function render() {
       navigate(stripBasePath(url.pathname))
     })
   })
-  document.querySelector('#search-form').addEventListener('submit', (event) => {
+  document.querySelector('#search-form')?.addEventListener('submit', (event) => {
     event.preventDefault()
     const query = new FormData(event.currentTarget).get('q') || ''
     navigate(`/buscar/${encodeURIComponent(query.toString().trim())}/`)
