@@ -269,8 +269,6 @@ function renderBlogDropdown() {
 function renderHeader() {
   const mobileServiceItems = [
     ['Plaquealo', plaquealoUrl, 'grid'],
-    ['MiGarage', plaquealoUrl, 'shield'],
-    ['Planes', plaquealoUrl, 'tag'],
     ['Vehículos', plaquealoUrl, 'grid'],
   ]
   return `
@@ -278,21 +276,15 @@ function renderHeader() {
       <a class="logo" href="${routeFor('/')}" aria-label="Automotor Peru"><img src="${assetPath('/automotor-logo.png')}" alt="Automotor.pe" /></a>
       <nav class="desktop-nav" id="primary-nav" aria-label="Navegacion principal">
         <a class="nav-plaquealo" href="${plaquealoUrl}">Plaquealo</a>
-        <a href="${plaquealoUrl}">MiGarage</a>
-        <a href="${plaquealoUrl}">Planes</a>
         <a href="${plaquealoUrl}">Vehículos</a>
         <div class="nav-item services-menu">
           <button class="services-trigger" type="button" aria-expanded="false">Otros servicios <span aria-hidden="true"></span></button>
           ${renderServiceMega()}
         </div>
-        <div class="nav-item blog-menu">
-          <button class="blog-trigger" type="button" aria-expanded="false">Blog <span aria-hidden="true"></span></button>
-          ${renderBlogDropdown()}
-        </div>
+        <a class="nav-blog-link" href="${routeFor('/archivo/')}">Blog</a>
       </nav>
       <div class="header-actions">
-        <a class="header-login" href="${navLink('/contacto/')}">${iconGlyph('user')}<span>Ingresar</span></a>
-        <a class="header-publish" href="https://seminuevos.automotor.pe/">${iconGlyph('car')}<span>Publicar vehículo</span><b>${iconGlyph('plus')}</b></a>
+        <button class="header-publish publish-open" type="button">${iconGlyph('car')}<span>Publicar vehículo</span><b>${iconGlyph('plus')}</b></button>
       </div>
       <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer"><span></span><span></span></button>
       <aside class="mobile-drawer" id="mobile-drawer" aria-label="Menu movil">
@@ -306,15 +298,61 @@ function renderHeader() {
           <p>Otros servicios</p>
           ${serviceNav.map((item) => `<a href="${navLink(item.href)}">${iconGlyph(item.icon)}<span>${item.label}</span></a>`).join('')}
           <p>Blog</p>
-          ${blogLinks.map(([label, path]) => `<a href="${navLink(path)}">${iconGlyph('book')}<span>${label}</span></a>`).join('')}
+          <a href="${routeFor('/archivo/')}">${iconGlyph('book')}<span>Blog</span></a>
         </nav>
         <div class="mobile-drawer-actions">
-          <a class="mobile-publish" href="https://seminuevos.automotor.pe/">Publicar vehículo</a>
-          <a class="mobile-login" href="${navLink('/contacto/')}">Continuar con Google</a>
+          <button class="mobile-publish publish-open" type="button">Publicar vehículo</button>
         </div>
         <div class="mobile-legal"><span>Legal</span><span>Privacidad</span><span>Cookies</span></div>
       </aside>
     </header>
+  `
+}
+
+function renderPublishModal() {
+  return `
+    <div class="modal publish-modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="publish-title">
+        <div class="modal-top">
+          <div>
+            <h2 id="publish-title">Publicar vehículo</h2>
+            <p>Crea una publicación clara</p>
+          </div>
+          <button class="modal-close" type="button" aria-label="Cerrar formulario">${iconGlyph('plus')}</button>
+        </div>
+        <form class="publish-form">
+          <fieldset>
+            <legend>1. Identificación</legend>
+            <label><span>Placa</span><input type="text" placeholder="ABC-123" /></label>
+            <label><span>Año</span><input type="number" placeholder="2021" /></label>
+            <label><span>Marca</span><select><option>Selecciona una marca</option><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Mazda</option><option>Volkswagen</option><option>BMW</option></select></label>
+            <label><span>Modelo</span><input type="text" placeholder="Modelo" /></label>
+          </fieldset>
+          <fieldset>
+            <legend>2. Características</legend>
+            <label><span>Kilometraje</span><input type="number" placeholder="45000" /></label>
+            <label><span>Transmisión</span><select><option>Automática</option><option>Mecánica</option></select></label>
+            <label><span>Combustible</span><select><option>Gasolina</option><option>Diésel</option><option>Híbrido</option><option>Eléctrico</option></select></label>
+            <label><span>Versión</span><input type="text" placeholder="Versión" /></label>
+          </fieldset>
+          <fieldset>
+            <legend>3. Publicación</legend>
+            <label><span>Precio</span><input type="text" placeholder="US$ 18,500" /></label>
+            <label><span>Ubicación</span><input type="text" placeholder="Lima" /></label>
+            <label class="wide"><span>Descripción</span><textarea placeholder="Describe el estado, mantenimiento y extras"></textarea></label>
+            <label><span>Fotos</span><input type="file" multiple /></label>
+          </fieldset>
+          <fieldset class="verification-box">
+            <legend>4. Verificación</legend>
+            <label><input type="radio" name="verify" checked /> <span>Publicación estándar</span></label>
+            <label><input type="radio" name="verify" /> <span>Verificada por Automotor.pe</span></label>
+            <p>La verificación ayuda a presentar la información disponible con mayor claridad. No reemplaza una inspección física ni constituye garantía legal.</p>
+          </fieldset>
+          <button type="button">Enviar publicación</button>
+          <p class="modal-note">Los datos se conservan en esta sesión de demostración.</p>
+        </form>
+      </div>
+    </div>
   `
 }
 
@@ -917,7 +955,7 @@ function render() {
   else if (entryByPath.has(route)) { viewTitle = entryByPath.get(route).title; view = renderEntry(entryByPath.get(route)) }
   else { viewTitle = 'Contenido no encontrado'; view = renderNotFound() }
 
-  document.querySelector('#app').innerHTML = `${renderHeader()}${view}${renderFooter()}${renderWhatsappButton()}`
+  document.querySelector('#app').innerHTML = `${renderHeader()}${view}${renderFooter()}${renderPublishModal()}${renderWhatsappButton()}`
   setMeta(route, viewTitle)
   const menuButton = document.querySelector('.menu-button')
   const syncMobileMenuPosition = () => {
@@ -1033,6 +1071,27 @@ function initInteractions() {
       button.setAttribute('aria-expanded', String(active))
     })
   })
+  const publishModal = document.querySelector('.publish-modal')
+  const closePublishModal = () => {
+    document.body.classList.remove('publish-modal-open')
+    publishModal?.setAttribute('aria-hidden', 'true')
+  }
+  document.querySelectorAll('.publish-open').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      document.body.classList.remove('menu-open')
+      publishModal?.setAttribute('aria-hidden', 'false')
+      document.body.classList.add('publish-modal-open')
+      publishModal?.querySelector('input, select, textarea')?.focus()
+    })
+  })
+  document.querySelector('.modal-close')?.addEventListener('click', closePublishModal)
+  publishModal?.addEventListener('click', (event) => {
+    if (event.target === publishModal) closePublishModal()
+  })
+  document.onkeydown = (event) => {
+    if (event.key === 'Escape') closePublishModal()
+  }
 }
 
 function syncHeaderState() {
