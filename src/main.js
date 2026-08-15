@@ -92,6 +92,101 @@ const sourceGroups = [
   },
 ]
 
+const consultationDirectory = [
+  {
+    title: 'Identidad, propiedad y seguro',
+    unit: 'fuentes',
+    featured: true,
+    items: [
+      ['SUN', 'Consulta vehicular', 'SUNARP - propietario vigente', 'https://consultavehicular.sunarp.gob.pe/'],
+      ['SAT', 'Impuesto vehicular', 'SAT Lima - deudas', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+      ['SOAT', 'Consulta de SOAT', 'APESEG - vigencia', 'https://www.apeseg.org.pe/consultas-soat/'],
+    ],
+  },
+  {
+    title: 'Papeletas y multas',
+    unit: 'consultas',
+    items: [
+      ['SAT', 'Papeletas SAT Lima', 'Lima Metropolitana', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+      ['CAL', 'Papeletas Callao', 'Municipalidad del Callao', 'https://pagopapeletascallao.pe/'],
+      ['SUT', 'Papeletas SUTRAN', 'Fiscalizacion nacional', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/'],
+      ['S/', 'Monto SUTRAN', 'Deuda acumulada', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/verifica-tu-infraccion/'],
+      ['ATU', 'Multas ATU', 'Transporte urbano', 'https://pasarela.atu.gob.pe/#'],
+      ['FOTO', 'Fotopit', 'Registro de fotopapeletas', 'http://www.pit.gob.pe/pit2007/EstadoCuentaVelocidad.aspx'],
+    ],
+  },
+  {
+    title: 'Estado tecnico y accidentes',
+    unit: 'consultas',
+    items: [
+      ['MTC', 'Inspeccion vehicular', 'Revision tecnica MTC', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
+      ['GNV', 'Deudas GNV FISE', 'Financiamiento energetico', 'https://fise.minem.gob.pe:23308/consulta-taller/pages/consultaTaller/inicio'],
+      ['GNV', 'Vigencia de tanque', 'Certificacion GNV', 'https://vh.infogas.com.pe/'],
+      ['PE', 'Estado de placa', 'Cambio y fabricacion', 'https://www.placas.pe/#/home/verificarEstadoPlaca'],
+      ['SOAT', 'Accidentes por SOAT', 'Siniestros reportados', 'https://servicios.sbs.gob.pe/reportesoat/'],
+      ['SEG', 'Accidentes por seguro', 'Seguro vehicular', 'https://servicios.sbs.gob.pe/reportesoat/'],
+    ],
+  },
+  {
+    title: 'Papeletas en el norte del Peru',
+    unit: 'ciudades',
+    wide: true,
+    items: [
+      ['TRU', 'SAT Trujillo', 'La Libertad', 'https://satt.gob.pe/servicios/record-de-infracciones'],
+      ['PIU', 'Papeletas Piura', 'Piura', ''],
+      ['TAR', 'Papeletas Tarapoto', 'San Martin', ''],
+      ['CHI', 'Papeletas Chiclayo', 'Lambayeque', ''],
+      ['CAJ', 'Papeletas Cajamarca', 'Cajamarca', 'https://www.satcajamarca.gob.pe/#/'],
+      ['CHA', 'Papeletas Chachapoyas', 'Amazonas', ''],
+      ['JAE', 'Consulta Jaen', 'Cajamarca', ''],
+      ['TUM', 'Consulta Tumbes', 'Tumbes', ''],
+    ],
+  },
+  {
+    title: 'Papeletas en el centro',
+    unit: 'ciudades',
+    items: [
+      ['HYO', 'Papeletas Huancayo', 'Junin', ''],
+      ['HCO', 'Papeletas Huanuco', 'Huanuco', ''],
+      ['PCL', 'Papeletas Pucallpa', 'Ucayali', ''],
+      ['AND', 'Papeletas Andahuaylas', 'Apurimac', ''],
+    ],
+  },
+  {
+    title: 'Papeletas en el sur',
+    unit: 'ciudades',
+    items: [
+      ['ICA', 'Papeletas Ica', 'Ica', ''],
+      ['AQP', 'Papeletas Arequipa', 'Arequipa', 'https://www.muniarequipa.gob.pe/oficina-virtual/c0nInfrPermisos/faltas/papeletas.php'],
+      ['CUZ', 'Papeletas Cusco', 'Cusco', ''],
+      ['TCQ', 'Papeletas Tacna', 'Tacna', 'https://www.munitacna.gob.pe/pagina/sf/servicios/papeletas'],
+      ['AYA', 'Consulta Ayacucho', 'Ayacucho', ''],
+      ['PUN', 'Consulta Puno', 'Puno', ''],
+    ],
+  },
+  {
+    title: 'Historial y procedencia',
+    unit: 'consultas',
+    items: [
+      ['SUN', 'Historial de propietarios', 'Duenos anteriores', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
+      ['S/', 'Precio pagado', 'Transferencias previas', 'https://sprl.sunarp.gob.pe/sprl/ingreso'],
+      ['SUN', 'Anotaciones SUNARP', 'Embargo, credito y prenda', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
+      ['KM', 'Kilometraje estimado', 'Referencia segun antecedentes', ''],
+      ['PE', 'Procedencia del vehiculo', 'Origen y registros disponibles', ''],
+    ],
+  },
+  {
+    title: 'Documentos y seguridad',
+    unit: 'consultas',
+    items: [
+      ['TIVE', 'Descargar TIVE', 'Tarjeta de propiedad', 'https://www.sunarp.gob.pe/serviciosenlinea/portal/tarjeta-de-identificacion-vehicular-electronica-tive.html'],
+      ['PNP', 'Lunas polarizadas', 'Permiso policial', 'https://sistemas.policia.gob.pe/consultalunas/ConsultarServicioLunas'],
+      ['PNP', 'Consulta de robo', 'Requisitoria vehicular', 'https://sistemas1.policia.gob.pe/ConsultaPVR/ErrorSesion.aspx'],
+      ['SAT', 'Orden de captura', 'SAT Lima', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+    ],
+  },
+]
+
 const services = [
   ['Reporte Infocorp', '/reporte-infocorp/'],
   ['Reporte vehicular', '/consulta-vehicular/'],
@@ -278,7 +373,7 @@ function renderHeader() {
         <a class="nav-plaquealo" href="${plaquealoUrl}">Plaquealo</a>
         <a href="${plaquealoUrl}">Vehículos</a>
         <div class="nav-item services-menu">
-          <button class="services-trigger" type="button" aria-expanded="false">Otros servicios <span aria-hidden="true"></span></button>
+          <button class="services-trigger" type="button" aria-expanded="false">Otros servicios <span class="services-caret" aria-hidden="true"></span></button>
           ${renderServiceMega()}
         </div>
         <a class="nav-blog-link" href="${routeFor('/archivo/')}">Blog</a>
@@ -436,7 +531,7 @@ function renderFeaturedPosts() {
 }
 
 function renderCategorySection(slug, title, intro, cta = 'Ver categoria') {
-  const posts = postsByCategory(slug, 6)
+  const posts = postsByCategory(slug, 3)
   if (!posts.length) return ''
   return `
     <section class="category-section">
@@ -448,6 +543,46 @@ function renderCategorySection(slug, title, intro, cta = 'Ver categoria') {
         <a href="${routeFor(`/categoria/${slug}/`)}">${cta}</a>
       </header>
       <div class="post-grid">${posts.map(renderPostCard).join('')}</div>
+    </section>
+  `
+}
+
+function renderHomeDecisionBlock() {
+  return `
+    <section class="home-decision" id="reporte-plaquelo">
+      <header>
+        <span>Reporte vehicular</span>
+        <h2>¿Cómo deseas obtener el historial?</h2>
+        <p>Consulta las fuentes oficiales manualmente o recibe un reporte Plaquealo consolidado, visual y listo para decidir en 2 minutos.</p>
+      </header>
+      <div class="decision-grid">
+        <article class="decision-card manual">
+          <div>
+            <small>Opción 1</small>
+            <h3>Manual y gratuita</h3>
+          </div>
+          <ul>
+            <li>Consultar 5 a 8 páginas distintas.</li>
+            <li>Resolver CAPTCHAs, formularios y páginas lentas.</li>
+            <li>Interpretar datos dispersos y tecnicismos.</li>
+            <li>Tiempo estimado: 30 a 45 minutos.</li>
+          </ul>
+          <a href="${routeFor('/consulta-vehicular/')}">Ver enlaces oficiales gratuitos</a>
+        </article>
+        <article class="decision-card premium">
+          <div>
+            <small>Opción 2</small>
+            <h3>Reporte Plaquealo</h3>
+          </div>
+          <ul>
+            <li>Todo consolidado en un solo documento.</li>
+            <li>Listo en solo 2 minutos.</li>
+            <li>Formato limpio, visual y fácil de leer.</li>
+            <li>Cruce automático de datos oficiales.</li>
+          </ul>
+          <a href="${plaquealoUrl}">Generar reporte en 2 minutos</a>
+        </article>
+      </div>
     </section>
   `
 }
@@ -519,6 +654,7 @@ function renderHome() {
         <p>Todo el contenido publicado se conserva con slugs, imagenes y enlaces originales, organizado ahora en una experiencia mas rapida y clara.</p>
       </section>
       ${renderServiceStrip()}
+      ${renderHomeDecisionBlock()}
       ${renderFeaturedPosts()}
       ${renderCategorySection('historia-automotriz', 'Historia Automotriz', 'Archivo editorial')}
       ${renderCategorySection('lanzamientos', 'Lanzamientos en Peru', 'Mercado automotor')}
@@ -641,68 +777,65 @@ function renderServiceEntry(entry) {
   `
 }
 
-function renderConsultationSources(summary, tags) {
+function renderConsultationSources() {
+  const totalSources = consultationDirectory.reduce((count, group) => count + group.items.length, 0)
   return `
-    <section class="consult-start" id="fuentes">
-      <header class="official-head">
-        <div>
-          <span>Consulta vehicular</span>
-          <h1>Fuentes oficiales para revisar un vehiculo en Peru</h1>
+    <section class="consult-start consult-source-system" id="fuentes">
+      <header class="source-hero">
+        <div class="source-hero-copy">
+          <span>Consulta vehicular gratuita</span>
+          <strong>Fuentes oficiales</strong>
+          <h1>La informacion detrás de cada placa.</h1>
+        </div>
+        <div class="source-hero-side">
+          <p>Centralizamos consultas públicas y especializadas para revisar propiedad, deudas, seguros, inspecciones, antecedentes y papeletas en distintas regiones del Perú.</p>
+          <div class="source-stats">
+            <div><strong>${Math.floor(totalSources / 10) * 10}+</strong><span>consultas gratuitas</span></div>
+            <div><strong>${consultationDirectory.length}</strong><span>grupos de información</span></div>
+            <div><strong>1</strong><span>placa para comenzar</span></div>
+          </div>
         </div>
       </header>
-      <div class="consult-heading vehicle-showcase">
-        <div class="vehicle-copy">
-          <span>Reporte vehicular</span>
-          <h2>Compra o vende con respaldo</h2>
-          <p>Todo empieza por elegir la fuente correcta.</p>
-          <div class="service-tags">${tags.map((text) => `<strong>${text}</strong>`).join('')}</div>
-        </div>
-        <div class="source-dashboard" aria-label="Resumen de verificacion vehicular">
-          <div class="scan-card plate-card">
-            <span>Placa referencial</span>
-            <strong>ABC-123</strong>
-            <small>Sin consulta interna. Te llevamos a la fuente.</small>
-          </div>
-          <div class="scan-card status-card is-ok">
-            <span>SOAT</span>
-            <strong>Verificar vigencia</strong>
-          </div>
-          <div class="scan-card status-card is-alert">
-            <span>Papeletas</span>
-            <strong>Revisar multas</strong>
-          </div>
-          <div class="scan-card status-card is-neutral">
-            <span>Propiedad</span>
-            <strong>Validar registro</strong>
-          </div>
-          <div class="scan-line scan-line-one"></div>
-          <div class="scan-line scan-line-two"></div>
-          <div class="source-next">Fuentes oficiales debajo</div>
-        </div>
+      <div class="source-controls">
+        <label>
+          <span>Buscar fuente</span>
+          <input type="search" id="source-search" placeholder="Buscar entidad, ciudad o información" />
+        </label>
+        <select id="source-category" aria-label="Filtrar fuentes por categoría">
+          <option value="all">Todas las categorías</option>
+          ${consultationDirectory.map((group, index) => `<option value="${index}">${group.title}</option>`).join('')}
+        </select>
       </div>
-      <article class="consult-context">
-        <p>Con <strong>consulta vehicular</strong>, accede en segundos a informacion completa de vehiculos con placa peruana: multas, papeletas, requisitorias, revision tecnica, historial de dueños, gravamenes, deudas, impedimentos y accidentes reportados por el SOAT.</p>
-        <p>Para un analisis mas profundo, solicita el <a href="${routeFor('/consulta-vehicular/')}">Reporte Vehicular Detallado</a> con asesoria personalizada.</p>
-      </article>
-      <div class="official-board" aria-label="Fuentes principales">
-        ${sourceLinks
-          .map(
-            ({ source, title, description, href, badge, code, tone }) => `
-              <a class="official-card source-tone-${tone}" href="${href}" target="_blank" rel="noreferrer">
-                <span>${badge}</span>
-                <strong>${code}</strong>
-                <div>
-                  <small>${source}</small>
-                  <h2>${title}</h2>
-                  <p>${description}</p>
-                </div>
-                <em>Ir a la fuente</em>
-              </a>
-            `,
-          )
-          .join('')}
-      </div>
+      ${renderConsultationDirectory()}
     </section>
+  `
+}
+
+function renderConsultationDirectory() {
+  return `
+    <div class="source-directory-grid">
+      ${consultationDirectory.map((group, index) => `
+        <article class="source-table ${group.featured ? 'is-featured' : ''} ${group.wide ? 'is-wide' : ''}" data-source-group="${index}">
+          <header>
+            <h2>${group.title}</h2>
+            <span>${String(group.items.length).padStart(2, '0')} ${group.unit}</span>
+          </header>
+          <div class="source-table-list">
+            ${group.items.map(([code, title, meta, href, note]) => `
+              ${href ? `<a class="source-row" href="${href}" target="_blank" rel="noreferrer" data-source-text="${`${group.title} ${code} ${title} ${meta}`.toLowerCase()}">` : `<div class="source-row is-disabled" data-source-text="${`${group.title} ${code} ${title} ${meta}`.toLowerCase()}">`}
+                <small>${code}</small>
+                <span>
+                  <strong>${title}</strong>
+                  <em>${meta}</em>
+                  ${note ? `<b>${note}</b>` : ''}
+                </span>
+                <i>${href ? 'Consultar ↗' : 'No disponible'}</i>
+              ${href ? '</a>' : '</div>'}
+            `).join('')}
+          </div>
+        </article>
+      `).join('')}
+    </div>
   `
 }
 
@@ -774,39 +907,7 @@ function renderClaimsForm() {
 }
 
 function renderConsultationPanels() {
-  return `
-    <section class="consult-directory" aria-label="Directorio de fuentes vehiculares">
-      <header class="section-title">
-        <div>
-          <span>Directorio preservado</span>
-          <h2>Elige que necesitas revisar</h2>
-        </div>
-      </header>
-      <div class="source-tabs" role="tablist" aria-label="Tipos de consulta">
-        ${sourceGroups.map((group, index) => `<button class="source-filter source-group-${index}${index === 0 ? ' is-active' : ''}" type="button" data-source-panel="${index}">${group.title}</button>`).join('')}
-      </div>
-      <div class="directory-panels">
-        ${sourceGroups
-          .map(
-            (group, index) => `
-              <article class="directory-panel source-panel-${index}${index === 0 ? ' is-active' : ''}" data-source-content="${index}">
-                <button class="source-accordion" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">
-                  <span>${group.title}</span>
-                  <strong>+</strong>
-                </button>
-                <div class="directory-content">
-                  <p>${group.description}</p>
-                  <div class="directory-links">
-                    ${group.links.map(([label, description, href], linkIndex) => `<a class="directory-link-card source-group-${index}" href="${href}" target="_blank" rel="noreferrer"><small>${String(linkIndex + 1).padStart(2, '0')}</small><strong>${label}</strong><p>${description}</p><span>Abrir</span></a>`).join('')}
-                  </div>
-                </div>
-              </article>
-            `,
-          )
-          .join('')}
-      </div>
-    </section>
-  `
+  return ''
 }
 
 function renderServiceBenefits(slug) {
@@ -1023,7 +1124,7 @@ function initInteractions() {
       closeTimer = window.setTimeout(() => {
         item.classList.remove('is-open')
         button?.setAttribute('aria-expanded', 'false')
-      }, 280)
+      }, 220)
     }
     button?.addEventListener('click', (event) => {
       if (!window.matchMedia('(max-width: 1120px)').matches) return
@@ -1071,6 +1172,25 @@ function initInteractions() {
       button.setAttribute('aria-expanded', String(active))
     })
   })
+  const sourceSearch = document.querySelector('#source-search')
+  const sourceCategory = document.querySelector('#source-category')
+  const filterSources = () => {
+    const query = sourceSearch?.value.trim().toLowerCase() || ''
+    const category = sourceCategory?.value || 'all'
+    document.querySelectorAll('.source-table').forEach((group) => {
+      const inCategory = category === 'all' || group.dataset.sourceGroup === category
+      let visibleRows = 0
+      group.querySelectorAll('.source-row').forEach((row) => {
+        const matches = !query || row.dataset.sourceText.includes(query)
+        row.classList.toggle('is-filtered-out', !(inCategory && matches))
+        row.hidden = !(inCategory && matches)
+        if (!row.hidden) visibleRows += 1
+      })
+      group.hidden = !inCategory || visibleRows === 0
+    })
+  }
+  sourceSearch?.addEventListener('input', filterSources)
+  sourceCategory?.addEventListener('change', filterSources)
   const publishModal = document.querySelector('.publish-modal')
   const closePublishModal = () => {
     document.body.classList.remove('publish-modal-open')
