@@ -95,16 +95,18 @@ const sourceGroups = [
 const consultationDirectory = [
   {
     title: 'Identidad, propiedad y seguro',
+    category: 'identidad',
     unit: 'fuentes',
     featured: true,
     items: [
       ['SUN', 'Consulta vehicular', 'SUNARP - propietario vigente', 'https://consultavehicular.sunarp.gob.pe/'],
-      ['SAT', 'Impuesto vehicular', 'SAT Lima - deudas', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+      ['SAT', 'Impuesto vehicular', 'SAT Lima - deudas', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx?mysession=%2fkXttmyGbViC4eScebKDZ%2b7zxli%2bnKXbDliLSVM%2bG18%3d'],
       ['SOAT', 'Consulta de SOAT', 'APESEG - vigencia', 'https://www.apeseg.org.pe/consultas-soat/'],
     ],
   },
   {
     title: 'Papeletas y multas',
+    category: 'multas',
     unit: 'consultas',
     items: [
       ['SAT', 'Papeletas SAT Lima', 'Lima Metropolitana', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
@@ -117,6 +119,7 @@ const consultationDirectory = [
   },
   {
     title: 'Estado técnico y accidentes',
+    category: 'tecnico',
     unit: 'consultas',
     items: [
       ['MTC', 'Inspección vehicular', 'Revisión técnica MTC', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
@@ -129,36 +132,39 @@ const consultationDirectory = [
   },
   {
     title: 'Papeletas en el norte del Perú',
+    category: 'multas',
     unit: 'ciudades',
     wide: true,
     items: [
       ['TRU', 'SAT Trujillo', 'La Libertad', 'https://satt.gob.pe/servicios/record-de-infracciones'],
-      ['PIU', 'Papeletas Piura', 'Piura', ''],
-      ['TAR', 'Papeletas Tarapoto', 'San Martín', ''],
-      ['CHI', 'Papeletas Chiclayo', 'Lambayeque', ''],
+      ['PIU', 'Papeletas Piura', 'Piura', 'http://www.munipiura.gob.pe/consulta-de-multas-de-transito#buscar-por-placa'],
+      ['TAR', 'Papeletas Tarapoto', 'San Martín', 'https://www.sat-t.gob.pe/'],
+      ['CHI', 'Papeletas Chiclayo', 'Lambayeque', 'https://virtualsatch.satch.gob.pe/virtualsatch/record_infracciones/buscar_placa_'],
       ['CAJ', 'Papeletas Cajamarca', 'Cajamarca', 'https://www.satcajamarca.gob.pe/#/'],
-      ['CHA', 'Papeletas Chachapoyas', 'Amazonas', ''],
+      ['CHA', 'Papeletas Chachapoyas', 'Amazonas', 'https://app.munichachapoyas.gob.pe/servicios/consulta_papeletas/app/papeletas.php'],
       ['JAE', 'Consulta Jaen', 'Cajamarca', ''],
       ['TUM', 'Consulta Tumbes', 'Tumbes', ''],
     ],
   },
   {
     title: 'Papeletas en el centro',
+    category: 'multas',
     unit: 'ciudades',
     items: [
-      ['HYO', 'Papeletas Huancayo', 'Junín', ''],
-      ['HCO', 'Papeletas Huánuco', 'Huánuco', ''],
+      ['HYO', 'Papeletas Huancayo', 'Junín', 'http://sathuancayo.fortiddns.com:888/VentanillaVirtual/ConsultaPIT.aspx'],
+      ['HCO', 'Papeletas Huánuco', 'Huánuco', 'https://www.munihuanuco.gob.pe/wp-content/servicios/transportes/gt_papeletas.php'],
       ['PCL', 'Papeletas Pucallpa', 'Ucayali', ''],
-      ['AND', 'Papeletas Andahuaylas', 'Apurimac', ''],
+      ['AND', 'Papeletas Andahuaylas', 'Apurimac', 'https://muniandahuaylas.gob.pe/consultar-papeleta/'],
     ],
   },
   {
     title: 'Papeletas en el sur',
+    category: 'multas',
     unit: 'ciudades',
     items: [
-      ['ICA', 'Papeletas Ica', 'Ica', ''],
+      ['ICA', 'Papeletas Ica', 'Ica', 'https://m.satica.gob.pe/'],
       ['AQP', 'Papeletas Arequipa', 'Arequipa', 'https://www.muniarequipa.gob.pe/oficina-virtual/c0nInfrPermisos/faltas/papeletas.php'],
-      ['CUZ', 'Papeletas Cusco', 'Cusco', ''],
+      ['CUZ', 'Papeletas Cusco', 'Cusco', 'https://cusco.gob.pe/informatica/index.php/'],
       ['TCQ', 'Papeletas Tacna', 'Tacna', 'https://www.munitacna.gob.pe/pagina/sf/servicios/papeletas'],
       ['AYA', 'Consulta Ayacucho', 'Ayacucho', ''],
       ['PUN', 'Consulta Puno', 'Puno', ''],
@@ -166,23 +172,25 @@ const consultationDirectory = [
   },
   {
     title: 'Historial y procedencia',
+    category: 'identidad',
     unit: 'consultas',
     items: [
       ['SUN', 'Historial de propietarios', 'Dueños anteriores', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
-      ['S/', 'Precio pagado', 'Transferencias previas', 'https://sprl.sunarp.gob.pe/sprl/ingreso'],
-      ['SUN', 'Anotaciones SUNARP', 'Embargo, crédito y prenda', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
+      ['S/', 'Precio pagado', 'Transferencias previas', 'https://sigueloplus.sunarp.gob.pe/siguelo/'],
+      ['SUN', 'Anotaciones SUNARP', 'Embargo, crédito y prenda', 'https://sigueloplus.sunarp.gob.pe/siguelo/', 'Requiere cuenta SUNARP'],
       ['KM', 'Kilometraje estimado', 'Referencia segun antecedentes', ''],
       ['PE', 'Procedencia del vehículo', 'Origen y registros disponibles', ''],
     ],
   },
   {
     title: 'Documentos y seguridad',
+    category: 'seguridad',
     unit: 'consultas',
     items: [
       ['TIVE', 'Descargar TIVE', 'Tarjeta de propiedad', 'https://www.sunarp.gob.pe/serviciosenlinea/portal/tarjeta-de-identificacion-vehicular-electronica-tive.html'],
       ['PNP', 'Lunas polarizadas', 'Permiso policial', 'https://sistemas.policia.gob.pe/consultalunas/ConsultarServicioLunas'],
       ['PNP', 'Consulta de robo', 'Requisitoria vehicular', 'https://sistemas1.policia.gob.pe/ConsultaPVR/ErrorSesion.aspx'],
-      ['SAT', 'Orden de captura', 'SAT Lima', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+      ['SAT', 'Orden de captura', 'SAT Lima', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx?mysession=8QduqIL0JVCYoUtsKsI4LoDx73VGLXObdvYbjhAea%2fs%3d'],
     ],
   },
 ]
@@ -803,7 +811,10 @@ function renderConsultationSources() {
         </label>
         <select id="source-category" aria-label="Filtrar fuentes por categoría">
           <option value="all">Todas las categorías</option>
-          ${consultationDirectory.map((group, index) => `<option value="${index}">${group.title}</option>`).join('')}
+          <option value="identidad">Propiedad y registro</option>
+          <option value="multas">Multas y papeletas</option>
+          <option value="tecnico">Estado técnico y seguros</option>
+          <option value="seguridad">Documentos y seguridad</option>
         </select>
       </div>
       ${renderConsultationDirectory()}
@@ -815,7 +826,7 @@ function renderConsultationDirectory() {
   return `
     <div class="source-directory-grid">
       ${consultationDirectory.map((group, index) => `
-        <article class="source-table ${group.featured ? 'is-featured' : ''} ${group.wide ? 'is-wide' : ''}" data-source-group="${index}">
+        <article class="source-table ${group.featured ? 'is-featured' : ''} ${group.wide ? 'is-wide' : ''}" data-source-group="${index}" data-source-category="${group.category}">
           <header>
             <h2>${group.title}</h2>
             <span>${String(group.items.length).padStart(2, '0')} ${group.unit}</span>
@@ -1178,7 +1189,7 @@ function initInteractions() {
     const query = sourceSearch?.value.trim().toLowerCase() || ''
     const category = sourceCategory?.value || 'all'
     document.querySelectorAll('.source-table').forEach((group) => {
-      const inCategory = category === 'all' || group.dataset.sourceGroup === category
+      const inCategory = category === 'all' || group.dataset.sourceCategory === category
       let visibleRows = 0
       group.querySelectorAll('.source-row').forEach((row) => {
         const matches = !query || row.dataset.sourceText.includes(query)
