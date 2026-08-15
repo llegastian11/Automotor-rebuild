@@ -109,32 +109,32 @@ const consultationDirectory = [
     items: [
       ['SAT', 'Papeletas SAT Lima', 'Lima Metropolitana', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
       ['CAL', 'Papeletas Callao', 'Municipalidad del Callao', 'https://pagopapeletascallao.pe/'],
-      ['SUT', 'Papeletas SUTRAN', 'Fiscalizacion nacional', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/'],
+      ['SUT', 'Papeletas SUTRAN', 'Fiscalización nacional', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/'],
       ['S/', 'Monto SUTRAN', 'Deuda acumulada', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/verifica-tu-infraccion/'],
       ['ATU', 'Multas ATU', 'Transporte urbano', 'https://pasarela.atu.gob.pe/#'],
       ['FOTO', 'Fotopit', 'Registro de fotopapeletas', 'http://www.pit.gob.pe/pit2007/EstadoCuentaVelocidad.aspx'],
     ],
   },
   {
-    title: 'Estado tecnico y accidentes',
+    title: 'Estado técnico y accidentes',
     unit: 'consultas',
     items: [
-      ['MTC', 'Inspeccion vehicular', 'Revision tecnica MTC', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
-      ['GNV', 'Deudas GNV FISE', 'Financiamiento energetico', 'https://fise.minem.gob.pe:23308/consulta-taller/pages/consultaTaller/inicio'],
-      ['GNV', 'Vigencia de tanque', 'Certificacion GNV', 'https://vh.infogas.com.pe/'],
-      ['PE', 'Estado de placa', 'Cambio y fabricacion', 'https://www.placas.pe/#/home/verificarEstadoPlaca'],
+      ['MTC', 'Inspección vehicular', 'Revisión técnica MTC', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
+      ['GNV', 'Deudas GNV FISE', 'Financiamiento energético', 'https://fise.minem.gob.pe:23308/consulta-taller/pages/consultaTaller/inicio'],
+      ['GNV', 'Vigencia de tanque', 'Certificación GNV', 'https://vh.infogas.com.pe/'],
+      ['PE', 'Estado de placa', 'Cambio y fabricación', 'https://www.placas.pe/#/home/verificarEstadoPlaca'],
       ['SOAT', 'Accidentes por SOAT', 'Siniestros reportados', 'https://servicios.sbs.gob.pe/reportesoat/'],
       ['SEG', 'Accidentes por seguro', 'Seguro vehicular', 'https://servicios.sbs.gob.pe/reportesoat/'],
     ],
   },
   {
-    title: 'Papeletas en el norte del Peru',
+    title: 'Papeletas en el norte del Perú',
     unit: 'ciudades',
     wide: true,
     items: [
       ['TRU', 'SAT Trujillo', 'La Libertad', 'https://satt.gob.pe/servicios/record-de-infracciones'],
       ['PIU', 'Papeletas Piura', 'Piura', ''],
-      ['TAR', 'Papeletas Tarapoto', 'San Martin', ''],
+      ['TAR', 'Papeletas Tarapoto', 'San Martín', ''],
       ['CHI', 'Papeletas Chiclayo', 'Lambayeque', ''],
       ['CAJ', 'Papeletas Cajamarca', 'Cajamarca', 'https://www.satcajamarca.gob.pe/#/'],
       ['CHA', 'Papeletas Chachapoyas', 'Amazonas', ''],
@@ -146,8 +146,8 @@ const consultationDirectory = [
     title: 'Papeletas en el centro',
     unit: 'ciudades',
     items: [
-      ['HYO', 'Papeletas Huancayo', 'Junin', ''],
-      ['HCO', 'Papeletas Huanuco', 'Huanuco', ''],
+      ['HYO', 'Papeletas Huancayo', 'Junín', ''],
+      ['HCO', 'Papeletas Huánuco', 'Huánuco', ''],
       ['PCL', 'Papeletas Pucallpa', 'Ucayali', ''],
       ['AND', 'Papeletas Andahuaylas', 'Apurimac', ''],
     ],
@@ -168,11 +168,11 @@ const consultationDirectory = [
     title: 'Historial y procedencia',
     unit: 'consultas',
     items: [
-      ['SUN', 'Historial de propietarios', 'Duenos anteriores', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
+      ['SUN', 'Historial de propietarios', 'Dueños anteriores', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
       ['S/', 'Precio pagado', 'Transferencias previas', 'https://sprl.sunarp.gob.pe/sprl/ingreso'],
-      ['SUN', 'Anotaciones SUNARP', 'Embargo, credito y prenda', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
+      ['SUN', 'Anotaciones SUNARP', 'Embargo, crédito y prenda', 'https://sprl.sunarp.gob.pe/sprl/ingreso', 'Requiere cuenta SUNARP'],
       ['KM', 'Kilometraje estimado', 'Referencia segun antecedentes', ''],
-      ['PE', 'Procedencia del vehiculo', 'Origen y registros disponibles', ''],
+      ['PE', 'Procedencia del vehículo', 'Origen y registros disponibles', ''],
     ],
   },
   {
@@ -785,7 +785,7 @@ function renderConsultationSources() {
         <div class="source-hero-copy">
           <span>Consulta vehicular gratuita</span>
           <strong>Fuentes oficiales</strong>
-          <h1>La informacion detrás de cada placa.</h1>
+          <h1>La información detrás de cada placa.</h1>
         </div>
         <div class="source-hero-side">
           <p>Centralizamos consultas públicas y especializadas para revisar propiedad, deudas, seguros, inspecciones, antecedentes y papeletas en distintas regiones del Perú.</p>
