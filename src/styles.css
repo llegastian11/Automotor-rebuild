@@ -7274,3 +7274,15 @@ time,
     padding-left: 14px !important;
   }
 }
+
+/* Fix: adding "Consulta vehicular" to the desktop nav (5 items instead of 4)
+   made earlier layered rules shrink the <a> pills below their text width,
+   which visually overlapped adjacent items. Keep every nav pill at its
+   natural width so the row grows into the header's existing empty margin
+   instead of compressing. */
+.header .desktop-nav {
+  gap: 18px !important;
+}
+.header .desktop-nav > a {
+  flex-shrink: 0 !important;
+}
