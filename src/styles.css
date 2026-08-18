@@ -7286,3 +7286,56 @@ time,
 .header .desktop-nav > a {
   flex-shrink: 0 !important;
 }
+
+/* Fix: match /consulta-vehicular/ pixel-for-pixel with the Plaquealo site,
+   since it's the same page conceptually. A later "redesign" pass widened
+   this section to 1584px and bumped the h1 to a 72px clamp, both larger
+   than Plaquealo's 1180px container / 58.4px clamp — same content read at
+   very different scale and position between the two sites. Also unify the
+   WhatsApp button: Plaquealo uses a static 56px square with no animation;
+   this site had grown to 62px with a lighter green and a breathing pulse. */
+.consult-source-system {
+  max-width: 1180px !important;
+  padding-top: 163px !important;
+}
+
+.source-hero {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 70px !important;
+}
+
+.source-hero h1 {
+  max-width: 750px !important;
+  font-size: clamp(2rem, 4vw, 3.65rem) !important;
+  line-height: 1.08 !important;
+}
+
+.whatsapp-float {
+  right: max(18px, env(safe-area-inset-right)) !important;
+  bottom: max(18px, env(safe-area-inset-bottom)) !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 18px !important;
+  background: #1d9b55 !important;
+  box-shadow: 0 12px 26px rgba(19, 100, 58, 0.22) !important;
+  animation: none !important;
+}
+
+.whatsapp-float:hover {
+  background: #178048 !important;
+  box-shadow: 0 12px 26px rgba(19, 100, 58, 0.22) !important;
+  transform: translateY(-2px) !important;
+}
+
+.whatsapp-float svg {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+@media (max-width: 680px) {
+  .whatsapp-float {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 16px !important;
+  }
+}
