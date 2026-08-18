@@ -3,7 +3,9 @@ import './styles.css'
 
 const assetBase = import.meta.env.BASE_URL || '/'
 const basePath = assetBase === '/' ? '' : assetBase.replace(/\/$/, '')
-const plaquealoUrl = 'https://llegastian11.github.io/automotor-prototipo/#/plaquealo'
+const plaquealoBase = 'https://llegastian11.github.io/automotor-prototipo'
+const plaquealoUrl = `${plaquealoBase}/plaquealo/`
+const vehiculosUrl = `${plaquealoBase}/vehiculos/`
 const whatsappPhone = '51923804533'
 const whatsappMessage = 'Hola Automotor, tengo dudas y necesito ayuda.'
 
@@ -372,14 +374,16 @@ function renderBlogDropdown() {
 function renderHeader() {
   const mobileServiceItems = [
     ['Plaquealo', plaquealoUrl, 'grid'],
-    ['Vehículos', plaquealoUrl, 'grid'],
+    ['Consulta vehicular', routeFor('/consulta-vehicular/'), 'search'],
+    ['Vehículos', vehiculosUrl, 'grid'],
   ]
   return `
     <header class="header">
       <a class="logo" href="${routeFor('/')}" aria-label="Automotor Peru"><img src="${assetPath('/automotor-logo.png')}" alt="Automotor.pe" /></a>
       <nav class="desktop-nav" id="primary-nav" aria-label="Navegacion principal">
         <a class="nav-plaquealo" href="${plaquealoUrl}">Plaquealo</a>
-        <a href="${plaquealoUrl}">Vehículos</a>
+        <a href="${routeFor('/consulta-vehicular/')}">Consulta vehicular</a>
+        <a href="${vehiculosUrl}">Vehículos</a>
         <div class="nav-item services-menu">
           <button class="services-trigger" type="button" aria-expanded="false">Otros servicios <span class="services-caret" aria-hidden="true"></span></button>
           ${renderServiceMega()}
@@ -387,7 +391,7 @@ function renderHeader() {
         <a class="nav-blog-link" href="${routeFor('/archivo/')}">Blog</a>
       </nav>
       <div class="header-actions">
-        <button class="header-publish publish-open" type="button">${iconGlyph('car')}<span>Publicar vehículo</span><b>${iconGlyph('plus')}</b></button>
+        <button class="header-publish publish-open" type="button"><span>Publicar vehículo</span><b>${iconGlyph('plus')}</b></button>
       </div>
       <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-drawer"><span></span><span></span></button>
       <aside class="mobile-drawer" id="mobile-drawer" aria-label="Menu movil">
@@ -792,7 +796,6 @@ function renderConsultationSources() {
       <header class="source-hero">
         <div class="source-hero-copy">
           <span>Consulta vehicular gratuita</span>
-          <strong>Fuentes oficiales</strong>
           <h1>La información detrás de cada placa.</h1>
         </div>
         <div class="source-hero-side">
