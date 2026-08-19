@@ -1,0 +1,86 @@
+---
+import { company } from '../data/company';
+---
+
+<form class="quote-card claims-form" id="claimsForm" data-whatsapp={company.contact.whatsapp} novalidate>
+  <h2>Libro de Reclamaciones</h2>
+  <p>Completa el formulario y recibirás la confirmación de tu reclamo por WhatsApp.</p>
+  <div class="quote-grid">
+    <div class="quote-field">
+      <label for="claim-doctype">Tipo de documento</label>
+      <select id="claim-doctype"><option>DNI</option><option>CE</option><option>RUC</option><option>Pasaporte</option></select>
+    </div>
+    <div class="quote-field">
+      <label for="claim-docnumber">Número de documento *</label>
+      <input id="claim-docnumber" placeholder="Documento" />
+    </div>
+    <div class="quote-field">
+      <label for="claim-name">Nombres completos *</label>
+      <input id="claim-name" placeholder="Nombre completo" />
+    </div>
+    <div class="quote-field">
+      <label for="claim-email">Correo electrónico *</label>
+      <input id="claim-email" type="email" placeholder="correo@dominio.com" />
+    </div>
+    <div class="quote-field">
+      <label for="claim-phone">Teléfono</label>
+      <input id="claim-phone" placeholder="+51" />
+    </div>
+    <div class="quote-field">
+      <label for="claim-type">Tipo de reclamación</label>
+      <select id="claim-type"><option>Reclamo</option><option>Queja</option></select>
+    </div>
+    <div class="quote-field full">
+      <label for="claim-detail">Detalle de la reclamación *</label>
+      <textarea id="claim-detail" placeholder="Describe tu caso"></textarea>
+    </div>
+    <button class="btn btn-red" type="submit">Enviar reclamo</button>
+  </div>
+  <p class="quote-note">Al enviar recibirás una constancia por WhatsApp con el detalle registrado.</p>
+  <p class="quote-feedback" role="status"></p>
+</form>
+
+<style>
+  .quote-card { padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-soft); }
+  .quote-card h2 { margin: 0; font: 700 22px var(--font-display); }
+  .quote-card > p { margin: 9px 0 25px; color: var(--muted); line-height: 1.55; }
+  .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .quote-field { display: grid; gap: 7px; }
+  .quote-field.full { grid-column: 1 / -1; }
+  .quote-field label { font-size: 12px; font-weight: 700; }
+  .quote-field input, .quote-field select, .quote-field textarea { border: 1px solid var(--line); border-radius: 11px; background: #fff; padding: 0 14px; font-family: inherit; }
+  .quote-field input, .quote-field select { height: 50px; }
+  .quote-field textarea { min-height: 110px; padding: 12px 14px; resize: vertical; }
+  .quote-grid .btn { grid-column: 1 / -1; }
+  .quote-note { margin: 14px 0 0 !important; font-size: 11px; color: var(--muted); }
+  .quote-feedback { margin: 12px 0 0; color: var(--danger); font-size: 12px; min-height: 14px; }
+
+  @media (max-width: 680px) {
+    .quote-card { padding: 20px; }
+    .quote-grid { grid-template-columns: 1fr; }
+    .quote-field.full, .quote-grid .btn { grid-column: auto; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('claimsForm') as HTMLFormElement | null;
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const docType = (document.getElementById('claim-doctype') as HTMLSelectElement).value;
+    const docNumber = (document.getElementById('claim-docnumber') as HTMLInputElement).value.trim();
+    const name = (document.getElementById('claim-name') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('claim-email') as HTMLInputElement).value.trim();
+    const claimType = (document.getElementById('claim-type') as HTMLSelectElement).value;
+    const detail = (document.getElementById('claim-detail') as HTMLTextAreaElement).value.trim();
+    const feedback = form.querySelector<HTMLElement>('.quote-feedback');
+
+    if (!docNumber || !name || !email || !detail) {
+      if (feedback) { feedback.textContent = 'Completa documento, nombres, correo y el detalle del reclamo.'; feedback.style.color = 'var(--danger)'; }
+      return;
+    }
+    const whatsapp = form.dataset.whatsapp;
+    const message = `Hola, deseo registrar un reclamo en el Libro de Reclamaciones.\n\nTipo de documento: ${docType}\nNúmero: ${docNumber}\nNombres: ${name}\nCorreo: ${email}\nTipo: ${claimType}\nDetalle: ${detail}`;
+    window.open(`https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    if (feedback) { feedback.textContent = 'Abrimos WhatsApp con tu reclamo listo para enviar.'; feedback.style.color = 'var(--green)'; }
+  });
+</script>

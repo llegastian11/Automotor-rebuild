@@ -1,0 +1,34 @@
+---
+import { withBase } from '../utils/url';
+import { formatDate, clip, type ContentEntry } from '../data/content';
+
+interface Props {
+  post: ContentEntry;
+}
+const { post } = Astro.props;
+const image = post.featuredMedia?.url;
+---
+
+<article class="post-card">
+  {image && <img src={withBase(image)} alt={post.featuredMedia?.alt || post.title} loading="lazy" width="400" height="250" />}
+  <div class="post-card-body">
+    <span class="post-card-cat">{post.category}</span>
+    <time>{formatDate(post.date)}</time>
+    <h3>{post.title}</h3>
+    <p>{clip(post.excerpt || post.plainText)}</p>
+    <a class="post-card-link" href={withBase(post.path)}>Leer más →</a>
+  </div>
+</article>
+
+<style>
+  .post-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: #fff; transition: 0.25s ease; }
+  .post-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .post-card img { width: 100%; height: 190px; object-fit: cover; }
+  .post-card-body { padding: 20px; }
+  .post-card-cat { display: inline-block; color: var(--red); font: 700 10px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+  .post-card-body time { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+  .post-card-body h3 { margin: 10px 0 0; font: 600 17px/1.35 var(--font-display); }
+  .post-card-body p { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .post-card-link { display: inline-block; margin-top: 14px; color: var(--ink); font-size: 13px; font-weight: 700; }
+  .post-card-link:hover { color: var(--red); }
+</style>

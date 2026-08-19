@@ -1,0 +1,120 @@
+---
+import { vehicleCatalog } from '../data/services';
+---
+
+<div class="modal publish-modal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="publish-title">
+    <div class="modal-top">
+      <div><p class="eyebrow">Publicar vehículo</p><h2 id="publish-title">Crea una publicación clara</h2></div>
+      <button class="modal-close" type="button" aria-label="Cerrar formulario">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <form class="publish-form" id="publishForm">
+      <fieldset>
+        <legend>1. Identificación</legend>
+        <div class="form-grid">
+          <label><span>Placa</span><input type="text" placeholder="ABC-123" required /></label>
+          <label><span>Año</span><input type="number" placeholder="2021" required /></label>
+          <label><span>Marca</span>
+            <select id="pubBrand" required>
+              <option value="">Selecciona una marca</option>
+              {Object.keys(vehicleCatalog).map((brand) => <option>{brand}</option>)}
+            </select>
+          </label>
+          <label><span>Modelo</span><select id="pubModel" disabled required><option value="">Selecciona una marca</option></select></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>2. Características</legend>
+        <div class="form-grid">
+          <label><span>Kilometraje</span><input type="number" placeholder="45000" /></label>
+          <label><span>Transmisión</span><select><option>Automática</option><option>Mecánica</option></select></label>
+          <label><span>Combustible</span><select><option>Gasolina</option><option>Diésel</option><option>Híbrido</option><option>Eléctrico</option></select></label>
+          <label><span>Versión</span><input type="text" placeholder="Versión" /></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>3. Publicación</legend>
+        <div class="form-grid">
+          <label><span>Precio</span><input type="text" placeholder="US$ 18,500" /></label>
+          <label><span>Ubicación</span><input type="text" placeholder="Lima" /></label>
+          <label class="wide"><span>Descripción</span><textarea placeholder="Describe el estado, mantenimiento y extras"></textarea></label>
+          <label><span>Fotos</span><input type="file" multiple accept="image/*" /></label>
+        </div>
+      </fieldset>
+      <fieldset class="verification-box">
+        <legend>4. Verificación</legend>
+        <label><input type="radio" name="verify" checked /> <span>Publicación estándar</span></label>
+        <label><input type="radio" name="verify" /> <span>Verificada por Automotor.pe</span></label>
+        <p>La verificación ayuda a presentar la información disponible con mayor claridad. No reemplaza una inspección física ni constituye garantía legal.</p>
+      </fieldset>
+      <button class="btn btn-red" type="submit">Enviar publicación</button>
+      <p class="modal-note" id="publishStatus">Los datos se conservan solo en esta sesión del navegador.</p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .modal { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 20px; background: rgba(21, 21, 21, 0.72); }
+  :global(body.publish-modal-open) .modal { display: grid; }
+  .modal-card { width: min(760px, 100%); max-height: min(90vh, 820px); overflow: auto; border-radius: 22px; background: var(--surface); padding: 28px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3); }
+  .modal-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .modal-top h2 { margin: 0; font: 700 24px var(--font-display); }
+  .modal-close { border: 0; background: transparent; cursor: pointer; padding: 6px; }
+  .publish-form fieldset { border: 0; padding: 20px 0; margin: 0; border-top: 1px solid var(--line); }
+  .publish-form fieldset:first-of-type { border-top: 0; }
+  .publish-form legend { padding: 0; margin-bottom: 14px; font: 650 15px var(--font-display); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-grid label { display: grid; gap: 7px; }
+  .form-grid label.wide { grid-column: 1 / -1; }
+  .form-grid span { font-size: 12px; font-weight: 700; }
+  .form-grid input, .form-grid select, .form-grid textarea { height: 48px; border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 0 13px; outline: 0; font-family: inherit; }
+  .form-grid textarea { height: auto; min-height: 90px; padding: 12px 13px; resize: vertical; }
+  .form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(196, 30, 30, 0.1); }
+  .verification-box p { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+  .verification-box label { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
+  .publish-form > .btn { width: 100%; margin-top: 8px; }
+  .modal-note { margin: 14px 0 0; color: #7b7a7f; font-size: 12px; line-height: 1.5; }
+
+  @media (max-width: 680px) {
+    .modal-card { padding: 20px; border-radius: 18px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-grid label.wide { grid-column: auto; }
+  }
+</style>
+
+<script define:vars={{ vehicleCatalog }} is:inline>
+  const modal = document.querySelector('.publish-modal');
+  function openModal() {
+    document.body.classList.add('publish-modal-open');
+    modal?.setAttribute('aria-hidden', 'false');
+    modal?.querySelector('input, select, textarea')?.focus();
+  }
+  function closeModal() {
+    document.body.classList.remove('publish-modal-open');
+    modal?.setAttribute('aria-hidden', 'true');
+  }
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('.publish-open')) openModal();
+    if (event.target.closest('.modal-close')) closeModal();
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeModal(); });
+
+  const brandSelect = document.getElementById('pubBrand');
+  brandSelect?.addEventListener('change', () => {
+    const modelSelect = document.getElementById('pubModel');
+    const models = vehicleCatalog[brandSelect.value] || [];
+    modelSelect.innerHTML = models.length
+      ? `<option value="">Selecciona un modelo</option>${models.map((m) => `<option>${m}</option>`).join('')}`
+      : '<option value="">No hay modelos disponibles</option>';
+    modelSelect.disabled = !models.length;
+  });
+
+  document.getElementById('publishForm')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const status = document.getElementById('publishStatus');
+    if (status) status.textContent = 'Publicación registrada solo en esta sesión — la publicación real requiere iniciar sesión (próximamente).';
+  });
+</script>

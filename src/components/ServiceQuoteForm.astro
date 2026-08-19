@@ -1,0 +1,104 @@
+---
+import { company } from '../data/company';
+
+interface Props {
+  serviceName: string;
+}
+const { serviceName } = Astro.props;
+---
+
+<form class="quote-card" data-service-name={serviceName} data-whatsapp={company.contact.whatsapp} novalidate>
+  <h2>Solicita tu cotización</h2>
+  <p>Completa los datos y un asesor te responderá por WhatsApp con el siguiente paso.</p>
+  <div class="quote-grid">
+    <div class="quote-field">
+      <label for="q-plate">Número de placa *</label>
+      <input id="q-plate" name="plate" placeholder="Ej: ABC-123" maxlength="8" autocomplete="off" />
+      <span class="field-error" data-error="plate"></span>
+    </div>
+    <div class="quote-field">
+      <label for="q-place">Lugar donde circulará *</label>
+      <input id="q-place" name="place" placeholder="Ej: Lima, Callao, Arequipa" autocomplete="address-level1" />
+      <span class="field-error" data-error="place"></span>
+    </div>
+    <div class="quote-field full">
+      <label for="q-document">DNI o RUC *</label>
+      <input id="q-document" name="document" inputmode="numeric" pattern="[0-9]*" maxlength="11" placeholder="Ej: DNI o RUC" />
+      <span class="field-error" data-error="document"></span>
+    </div>
+    <div class="quote-field">
+      <label for="q-usage">Tipo de uso *</label>
+      <select id="q-usage" name="usage">
+        <option value="">Selecciona una opción</option>
+        <option>Particular</option>
+        <option>Taxi</option>
+        <option>Empresa</option>
+        <option>Flota</option>
+      </select>
+      <span class="field-error" data-error="usage"></span>
+    </div>
+    <button class="btn btn-red" type="submit">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.5c.5 2.7 2 4.2 4.7 5"/></svg>
+      Enviar por WhatsApp
+    </button>
+  </div>
+  <p class="quote-note">Tus datos solo se usarán para responder esta solicitud.</p>
+  <p class="quote-feedback" role="status"></p>
+</form>
+
+<style>
+  .quote-card { padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-soft); }
+  .quote-card h2 { margin: 0; font: 700 22px var(--font-display); }
+  .quote-card > p { margin: 9px 0 25px; color: var(--muted); line-height: 1.55; }
+  .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .quote-field { display: grid; gap: 7px; }
+  .quote-field.full { grid-column: 1 / -1; }
+  .quote-field label { font-size: 12px; font-weight: 700; }
+  .quote-field input, .quote-field select { height: 50px; border: 1px solid var(--line); border-radius: 11px; background: #fff; padding: 0 14px; }
+  .quote-field input[aria-invalid='true'], .quote-field select[aria-invalid='true'] { border-color: var(--danger); }
+  .field-error { min-height: 16px; display: block; color: var(--danger); font-size: 11px; }
+  .quote-grid .btn { grid-column: 1 / -1; }
+  .quote-note { margin: 14px 0 0 !important; font-size: 11px; color: var(--muted); }
+  .quote-feedback { margin: 12px 0 0; color: var(--danger); font-size: 12px; min-height: 14px; }
+
+  @media (max-width: 680px) {
+    .quote-card { padding: 20px; }
+    .quote-grid { grid-template-columns: 1fr; }
+    .quote-field.full, .quote-grid .btn { grid-column: auto; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('.quote-card').forEach((form) => {
+    form.querySelectorAll<HTMLInputElement>('input[name="document"]').forEach((input) => {
+      input.addEventListener('input', () => { input.value = input.value.replace(/\D/g, '').slice(0, 11); });
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const values = Object.fromEntries(data) as Record<string, string>;
+      const errors: Record<string, string> = {};
+
+      values.plate = (values.plate || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 8);
+      if (values.plate.replace('-', '').length < 6) errors.plate = 'Ingresa una placa válida.';
+      if (!(values.place || '').trim()) errors.place = 'Indica dónde circulará el vehículo.';
+      if (!/^(\d{8}|\d{11})$/.test(values.document || '')) errors.document = 'Ingresa un DNI de 8 o RUC de 11 dígitos.';
+      if (!values.usage) errors.usage = 'Selecciona el tipo de uso.';
+
+      form.querySelectorAll<HTMLElement>('.field-error').forEach((el) => { el.textContent = errors[el.dataset.error || ''] || ''; });
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input, select').forEach((input) => {
+        input.setAttribute('aria-invalid', String(Boolean(errors[input.name])));
+      });
+      if (Object.keys(errors).length) return;
+
+      const serviceName = form.dataset.serviceName;
+      const whatsapp = form.dataset.whatsapp;
+      const feedback = form.querySelector<HTMLElement>('.quote-feedback');
+      const message = `Hola, deseo solicitar una cotización de ${serviceName}.\n\nPlaca: ${values.plate}\nLugar donde circulará: ${values.place}\nDNI/RUC: ${values.document}\nTipo de uso: ${values.usage}\n\nQuisiera recibir información sobre la cotización.`;
+
+      window.open(`https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+      if (feedback) { feedback.textContent = 'Abrimos WhatsApp con tu solicitud lista para enviar.'; feedback.style.color = 'var(--green)'; }
+    });
+  });
+</script>

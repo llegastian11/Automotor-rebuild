@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostArchive from '../../components/PostArchive.astro';
+import { posts, paginate } from '../../data/content';
+
+const { items, page, totalPages } = paginate(posts, 12, 1);
+---
+
+<BaseLayout title="Archivo de artículos | Automotor.pe" description={`Explora los ${posts.length} artículos migrados desde WordPress: noticias, historia automotriz y lanzamientos en Perú.`}>
+  <PostArchive
+    title="Todos los artículos publicados"
+    subtitle={`${posts.length} artículos migrados desde WordPress`}
+    items={items}
+    page={page}
+    totalPages={totalPages}
+    baseRoute="/archivo"
+  />
+</BaseLayout>

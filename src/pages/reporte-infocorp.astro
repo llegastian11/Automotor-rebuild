@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InfocorpForm from '../components/InfocorpForm.astro';
+import { featureText } from '../data/services';
+
+const features = featureText['reporte-infocorp'];
+---
+
+<BaseLayout title="Reporte Infocorp en Perú | Automotor.pe" description="Consulta tu reporte Infocorp por DNI y conoce tu perfil crediticio antes de comprar o financiar un vehículo.">
+  <section class="section service-page">
+    <div class="container service-layout">
+      <div class="service-copy">
+        <p class="eyebrow">Servicio Automotor</p>
+        <h1 class="section-title">Reporte Infocorp</h1>
+        <p class="section-copy">Conoce tu historial financiero antes de comprar o financiar un vehículo.</p>
+        <div class="service-tags">{features.map((text) => <strong>{text}</strong>)}</div>
+      </div>
+      <InfocorpForm />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .service-page { background: linear-gradient(145deg, var(--paper), #fff); }
+  .service-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: start; }
+  .service-copy { position: sticky; top: 100px; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .service-tags strong { padding: 8px 12px; border-radius: 999px; background: var(--surface-secondary); font-size: 11px; font-weight: 700; }
+  @media (max-width: 980px) {
+    .service-layout { grid-template-columns: 1fr; gap: 34px; }
+    .service-copy { position: static; }
+  }
+</style>

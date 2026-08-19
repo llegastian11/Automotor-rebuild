@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ClaimsForm from '../components/ClaimsForm.astro';
+---
+
+<BaseLayout title="Libro de Reclamaciones | Automotor.pe" description="Registra tu reclamo o queja a través del Libro de Reclamaciones de Automotor.pe.">
+  <section class="section service-page">
+    <div class="container service-layout">
+      <div class="service-copy">
+        <p class="eyebrow">Atención al consumidor</p>
+        <h1 class="section-title">Libro de Reclamaciones</h1>
+        <p class="section-copy">Registra tu reclamo o queja. Un asesor confirmará el detalle por WhatsApp.</p>
+      </div>
+      <ClaimsForm />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .service-page { background: linear-gradient(145deg, var(--paper), #fff); }
+  .service-layout { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; }
+  .service-copy { position: sticky; top: 100px; }
+  @media (max-width: 980px) {
+    .service-layout { grid-template-columns: 1fr; gap: 34px; }
+    .service-copy { position: static; }
+  }
+</style>

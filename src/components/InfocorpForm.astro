@@ -1,0 +1,53 @@
+---
+import { company } from '../data/company';
+---
+
+<form class="quote-card" id="infocorpForm" data-whatsapp={company.contact.whatsapp} novalidate>
+  <h2>Verificación de DNI</h2>
+  <p>Consulta tu reporte Infocorp y conoce tu perfil crediticio.</p>
+  <div class="quote-grid">
+    <div class="quote-field full">
+      <label for="infocorp-dni">Número de DNI *</label>
+      <input id="infocorp-dni" inputmode="numeric" maxlength="8" placeholder="12345678" />
+      <span class="field-error" id="infocorpError"></span>
+    </div>
+    <button class="btn btn-red" type="submit">Solicitar por S/ 14.90</button>
+  </div>
+  <p class="quote-note">La solicitud se prepara para validación; un asesor confirma el reporte por WhatsApp.</p>
+  <p class="quote-feedback" role="status"></p>
+</form>
+
+<style>
+  .quote-card { padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-soft); }
+  .quote-card h2 { margin: 0; font: 700 22px var(--font-display); }
+  .quote-card > p { margin: 9px 0 25px; color: var(--muted); line-height: 1.55; }
+  .quote-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .quote-field label { font-size: 12px; font-weight: 700; }
+  .quote-field input { height: 50px; width: 100%; border: 1px solid var(--line); border-radius: 11px; background: #fff; padding: 0 14px; margin-top: 7px; }
+  .field-error { display: block; min-height: 16px; color: var(--danger); font-size: 11px; }
+  .quote-note { margin: 14px 0 0 !important; font-size: 11px; color: var(--muted); }
+  .quote-feedback { margin: 12px 0 0; color: var(--danger); font-size: 12px; min-height: 14px; }
+</style>
+
+<script>
+  const form = document.getElementById('infocorpForm') as HTMLFormElement | null;
+  const dni = document.getElementById('infocorp-dni') as HTMLInputElement | null;
+  const error = document.getElementById('infocorpError');
+
+  dni?.addEventListener('input', () => { dni.value = dni.value.replace(/\D/g, '').slice(0, 8); });
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!dni || dni.value.length !== 8) {
+      if (error) error.textContent = 'Ingresa un DNI válido de 8 dígitos.';
+      dni?.focus();
+      return;
+    }
+    if (error) error.textContent = '';
+    const whatsapp = form.dataset.whatsapp;
+    const message = `Hola, deseo solicitar mi Reporte Infocorp.\n\nDNI: ${dni.value}\n\nQuisiera continuar con el pago de S/ 14.90.`;
+    window.open(`https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    const feedback = form.querySelector<HTMLElement>('.quote-feedback');
+    if (feedback) { feedback.textContent = 'Abrimos WhatsApp con tu solicitud lista para enviar.'; feedback.style.color = 'var(--green)'; }
+  });
+</script>
