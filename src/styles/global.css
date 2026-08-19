@@ -19,8 +19,8 @@ svg { display: block; }
 .container { width: min(var(--container-max), calc(100% - 40px)); margin-inline: auto; }
 @media (max-width: 680px) { .container { width: calc(100% - 28px); } }
 
-.section { padding: 96px 0; }
-@media (max-width: 980px) { .section { padding: 72px 0; } }
+.section { padding: 108px 0; }
+@media (max-width: 980px) { .section { padding: 76px 0; } }
 @media (max-width: 680px) { .section { padding: 56px 0; } }
 
 .eyebrow {
@@ -34,8 +34,8 @@ svg { display: block; }
 .section-title {
   max-width: 750px;
   margin: 0;
-  font: 700 clamp(1.9rem, 3.6vw, 3.1rem) / 1.1 var(--font-display);
-  letter-spacing: -0.045em;
+  font: 700 clamp(2rem, 4vw, 3.65rem) / 1.08 var(--font-display);
+  letter-spacing: -0.055em;
   text-wrap: balance;
 }
 .section-copy {

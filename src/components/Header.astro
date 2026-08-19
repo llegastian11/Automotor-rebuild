@@ -104,28 +104,48 @@ const megaGroups = ['Consulta y documentos', 'Protección y seguridad'];
     backdrop-filter: blur(18px) saturate(140%);
   }
 
-  .desktop-nav { display: flex; align-items: center; gap: 16px; }
-  .desktop-nav > a,
-  .nav-item > button {
-    display: inline-flex;
-    align-items: center;
-    height: 42px;
-    border: 0;
-    border-radius: 9px;
-    background: transparent;
-    padding: 0 12px;
-    color: #4b4b50;
+  .desktop-nav { display: flex; align-items: center; gap: 18px; }
+  .desktop-nav > a {
+    position: relative;
     font-size: 13px;
     font-weight: 700;
-    cursor: pointer;
+    color: #55545a;
     white-space: nowrap;
     flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+  .desktop-nav > a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -8px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .desktop-nav > a:hover, .desktop-nav > a.active { color: var(--red); }
+  .desktop-nav > a:hover::after, .desktop-nav > a.active::after { transform: scaleX(1); transform-origin: left; }
+  .desktop-nav > a.nav-plaquealo {
+    padding: 10px 14px;
+    border-radius: 11px;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 7px 16px rgba(196, 30, 30, 0.18);
+  }
+  .desktop-nav > a.nav-plaquealo::after { display: none; }
+  .desktop-nav > a.nav-plaquealo:hover { background: var(--red-dark); color: #fff; }
+
+  .nav-item > button {
+    display: flex; align-items: center; gap: 5px;
+    min-height: 42px; padding: 0 8px;
+    border: 0; border-radius: 9px; background: transparent;
+    color: #55545a; font-size: 13px; font-weight: 700; cursor: pointer;
     transition: background-color 0.18s ease, color 0.18s ease;
   }
-  .desktop-nav > a:hover, .nav-item > button:hover, .nav-item.is-open > button { background: var(--surface-secondary); color: var(--ink); }
-  .desktop-nav > a.nav-plaquealo { background: var(--red); color: #fff; border-radius: 11px; box-shadow: 0 7px 16px rgba(196, 30, 30, 0.18); }
-  .desktop-nav > a.nav-plaquealo:hover { background: var(--red-dark); color: #fff; }
-  .caret { width: 7px; height: 7px; margin-left: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.2s ease; }
+  .nav-item > button:hover, .nav-item.is-open > button { background: var(--surface-secondary); color: var(--red); }
+  .caret { width: 7px; height: 7px; margin-left: 1px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.2s ease; }
   .nav-item.is-open .caret { transform: rotate(225deg) translateY(2px); }
 
   .nav-item { position: relative; }
