@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://automotor.pe/sitemap.xml
+
+Sitemap: https://llegastian11.github.io/Automotor-rebuild/sitemap-index.xml

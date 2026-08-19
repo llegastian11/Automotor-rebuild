@@ -1,0 +1,80 @@
+---
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import PublishModal from '../components/PublishModal.astro';
+import { company } from '../data/company';
+import { withBase } from '../utils/url';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, ogImage, type, noindex } = Astro.props;
+
+const siteUrl = String(Astro.site).replace(/\/$/, '');
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: company.brand,
+  legalName: company.legalName,
+  taxID: company.ruc,
+  url: siteUrl + import.meta.env.BASE_URL,
+  logo: siteUrl + import.meta.env.BASE_URL + 'automotor-logo.png',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: `+${company.contact.whatsapp}`,
+      areaServed: 'PE',
+      availableLanguage: 'Spanish',
+    },
+  ],
+};
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: company.brand,
+  url: siteUrl + import.meta.env.BASE_URL,
+  inLanguage: 'es-PE',
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f7f5f2" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <SEO title={title} description={description} ogImage={ogImage} type={type} noindex={noindex} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&family=Sora:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteJsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFab />
+    <PublishModal />
+  </body>
+</html>
+
+<style is:global>
+  main { padding-top: 24px; }
+</style>

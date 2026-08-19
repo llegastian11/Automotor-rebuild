@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostArchive from '../../../components/PostArchive.astro';
+import { posts, paginate } from '../../../data/content';
+
+export function getStaticPaths() {
+  const perPage = 12;
+  const totalPages = Math.max(1, Math.ceil(posts.length / perPage));
+  return Array.from({ length: totalPages - 1 }, (_, i) => ({ params: { page: String(i + 2) } }));
+}
+
+const pageNum = Number(Astro.params.page);
+const { items, page, totalPages } = paginate(posts, 12, pageNum);
+---
+
+<BaseLayout title={`Archivo de artículos · página ${page} | Automotor.pe`} description={`Explora los ${posts.length} artículos migrados desde WordPress — página ${page} de ${totalPages}.`} noindex>
+  <PostArchive
+    title="Todos los artículos publicados"
+    subtitle={`${posts.length} artículos migrados desde WordPress`}
+    items={items}
+    page={page}
+    totalPages={totalPages}
+    baseRoute="/archivo"
+  />
+</BaseLayout>

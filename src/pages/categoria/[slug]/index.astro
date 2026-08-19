@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostArchive from '../../../components/PostArchive.astro';
+import { posts, activeCategories, paginate } from '../../../data/content';
+
+export function getStaticPaths() {
+  return activeCategories.map((cat) => ({ params: { slug: cat.slug }, props: { cat } }));
+}
+
+const { cat } = Astro.props;
+const categoryPosts = posts.filter((post) => post.categories.some((c) => c.slug === cat.slug));
+const { items, page, totalPages } = paginate(categoryPosts, 12, 1);
+---
+
+<BaseLayout title={`${cat.name} | Automotor.pe`} description={`${categoryPosts.length} artículos en ${cat.name}, migrados desde WordPress.`}>
+  <PostArchive
+    title={cat.name}
+    subtitle={`${categoryPosts.length} artículos en ${cat.name}`}
+    items={items}
+    page={page}
+    totalPages={totalPages}
+    baseRoute={`/categoria/${cat.slug}`}
+  />
+</BaseLayout>

@@ -1,0 +1,80 @@
+---
+// El footer original solo tenía un párrafo y 3 enlaces — sin razón social ni
+// RUC en ningún lugar del sitio. Se agrega aquí, en el área corporativa,
+// igual que en Plaquéalo.
+import Brand from './Brand.astro';
+import { withBase } from '../utils/url';
+import { company } from '../data/company';
+import { activeCategories } from '../data/content';
+---
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <Brand href={withBase('/')} />
+      <p>{company.tagline}</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <a href={withBase('/consulta-vehicular/')}>Consulta vehicular</a>
+      <a href={withBase('/soat-electronico/')}>SOAT electrónico</a>
+      <a href={withBase('/seguro-vehicular/')}>Seguro vehicular</a>
+      <a href={withBase('/gps-vehicular/')}>GPS vehicular</a>
+      <a href={withBase('/reporte-infocorp/')}>Reporte Infocorp</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contenido</h4>
+      {activeCategories.map((cat) => <a href={withBase(`/categoria/${cat.slug}/`)}>{cat.name}</a>)}
+      <a href={withBase('/archivo/')}>Ver todo</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href={withBase('/politica-de-privacidad/')}>Política de privacidad</a>
+      <a href={withBase('/terminos-y-condiciones/')}>Términos y condiciones</a>
+      <a href={withBase('/libro-de-reclamos/')}>Libro de reclamos</a>
+      <a href={withBase('/contacto/')}>Contacto</a>
+    </div>
+  </div>
+
+  <div class="container footer-corporate">
+    <p><strong>{company.legalName}</strong> · RUC {company.ruc}</p>
+    <p>Marca comercial {company.brand}.</p>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© 2026 {company.brand}</span>
+    <span>Información para decidir con confianza.</span>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: 56px 0 26px; background: var(--ink); color: #fff; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; }
+  .footer-brand p { max-width: 280px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.5); font-size: 13px; line-height: 1.65; }
+  .footer-col h4 { margin: 0 0 14px; font: 700 12px var(--font-display); color: rgba(255, 255, 255, 0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+  .footer-col a { display: block; margin: 10px 0; color: rgba(255, 255, 255, 0.7); font-size: 13px; }
+  .footer-col a:hover { color: #fff; }
+
+  .footer-corporate {
+    margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.45); font-size: 12.5px; line-height: 1.7;
+  }
+  .footer-corporate strong { color: rgba(255, 255, 255, 0.7); font-weight: 700; }
+  .footer-corporate p { margin: 0; }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; gap: 20px;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.4); font-size: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { display: block; }
+    .footer-bottom span { display: block; margin-top: 6px; }
+  }
+</style>

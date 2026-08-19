@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PostArchive from '../../../../components/PostArchive.astro';
+import { posts, activeCategories, paginate } from '../../../../data/content';
+
+export function getStaticPaths() {
+  const perPage = 12;
+  return activeCategories.flatMap((cat) => {
+    const count = posts.filter((post) => post.categories.some((c) => c.slug === cat.slug)).length;
+    const totalPages = Math.max(1, Math.ceil(count / perPage));
+    return Array.from({ length: totalPages - 1 }, (_, i) => ({ params: { slug: cat.slug, page: String(i + 2) }, props: { cat } }));
+  });
+}
+
+const { cat } = Astro.props;
+const pageNum = Number(Astro.params.page);
+const categoryPosts = posts.filter((post) => post.categories.some((c) => c.slug === cat.slug));
+const { items, page, totalPages } = paginate(categoryPosts, 12, pageNum);
+---
+
+<BaseLayout title={`${cat.name} · página ${page} | Automotor.pe`} description={`${categoryPosts.length} artículos en ${cat.name} — página ${page} de ${totalPages}.`} noindex>
+  <PostArchive
+    title={cat.name}
+    subtitle={`${categoryPosts.length} artículos en ${cat.name}`}
+    items={items}
+    page={page}
+    totalPages={totalPages}
+    baseRoute={`/categoria/${cat.slug}`}
+  />
+</BaseLayout>

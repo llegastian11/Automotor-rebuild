@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { withBase } from '../utils/url';
+import { company } from '../data/company';
+import { site, posts, formatDate, clip, postsByCategory } from '../data/content';
+
+const lead = posts[0];
+const [featuredLead, ...featuredRest] = posts.slice(0, 5);
+
+const serviceLinks = [
+  { label: 'Reporte Infocorp', href: '/reporte-infocorp/' },
+  { label: 'Reporte vehicular', href: company.plaquealo.plaquealoUrl, external: true },
+  { label: 'SOAT electrónico', href: '/soat-electronico/' },
+  { label: 'GPS vehicular', href: '/gps-vehicular/' },
+  { label: 'Seguro vehicular', href: '/seguro-vehicular/' },
+];
+
+const categorySections = [
+  { slug: 'historia-automotriz', title: 'Historia Automotriz', intro: 'Archivo editorial' },
+  { slug: 'lanzamientos', title: 'Lanzamientos en Perú', intro: 'Mercado automotor' },
+  { slug: 'noticias', title: 'Noticias y guías', intro: 'Consultas vehiculares', cta: 'Ver noticias' },
+];
+---
+
+<BaseLayout
+  title="Automotor.pe | Consulta vehicular en Perú"
+  description="Automotor.pe reconstruido: consulta vehicular, fuentes oficiales, servicios y noticias automotrices en Perú."
+>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Automotor.pe</p>
+      <h1>Información vehicular para comprar, vender y decidir mejor.</h1>
+      <p class="hero-sub">Noticias, historia automotriz, lanzamientos y guías de consulta para el mercado peruano.</p>
+      <div class="hero-actions">
+        <a class="btn btn-red" href={withBase('/archivo/')}>Explorar artículos</a>
+        <a class="btn btn-outline" href={withBase('/consulta-vehicular/')}>Consulta vehicular</a>
+      </div>
+    </div>
+    <a class="hero-feature" href={withBase(lead.path)}>
+      {lead.featuredMedia?.url && <img src={withBase(lead.featuredMedia.url)} alt={lead.title} width="600" height="400" />}
+      <div class="hero-feature-body">
+        <span>{lead.category}</span>
+        <strong>{lead.title}</strong>
+        <small>{formatDate(lead.date)}</small>
+      </div>
+    </a>
+  </section>
+
+  <section class="section intro-stats">
+    <div class="container intro-grid">
+      <div><strong>{site.totals.posts}</strong><span>artículos migrados</span></div>
+      <div><strong>{site.totals.pages}</strong><span>páginas preservadas</span></div>
+      <div><strong>{site.totals.media}</strong><span>registros de media</span></div>
+      <p>Todo el contenido publicado se conserva con slugs, imágenes y enlaces originales, organizado ahora en una experiencia más rápida y clara.</p>
+    </div>
+  </section>
+
+  <section class="section service-strip">
+    <div class="container">
+      <p class="eyebrow">Servicios</p>
+      <h2 class="section-title">Accesos principales</h2>
+      <div class="service-strip-grid">
+        {serviceLinks.map((link) => (
+          <a href={link.external ? link.href : withBase(link.href)}>
+            <span>{link.label}</span>
+            <small>Ver servicio</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-decision">
+    <div class="container">
+      <p class="eyebrow">Reporte vehicular</p>
+      <h2 class="section-title">¿Cómo deseas obtener el historial?</h2>
+      <p class="section-copy">Consulta las fuentes oficiales manualmente o recibe un reporte Plaquéalo consolidado, visual y listo para decidir en 2 minutos.</p>
+      <div class="decision-grid">
+        <article class="decision-card">
+          <div><small>Opción 1</small><h3>Manual y gratuita</h3></div>
+          <ul>
+            <li>Consultar 5 a 8 páginas distintas.</li>
+            <li>Resolver CAPTCHAs, formularios y páginas lentas.</li>
+            <li>Interpretar datos dispersos y tecnicismos.</li>
+            <li>Tiempo estimado: 30 a 45 minutos.</li>
+          </ul>
+          <a class="btn btn-outline" href={withBase('/consulta-vehicular/')}>Ver enlaces oficiales gratuitos</a>
+        </article>
+        <article class="decision-card premium">
+          <div><small>Opción 2</small><h3>Reporte Plaquéalo</h3></div>
+          <ul>
+            <li>Todo consolidado en un solo documento.</li>
+            <li>Listo en solo 2 minutos.</li>
+            <li>Formato limpio, visual y fácil de leer.</li>
+            <li>Cruce automático de datos oficiales.</li>
+          </ul>
+          <a class="btn btn-red" href={company.plaquealo.plaquealoUrl}>Generar reporte en 2 minutos</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section featured">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Actualidad</p><h2 class="section-title">Lo último en Automotor</h2></div>
+        <a class="btn btn-outline" href={withBase('/archivo/')}>Ver archivo completo</a>
+      </div>
+      <div class="featured-layout">
+        <a class="lead-card" href={withBase(featuredLead.path)}>
+          {featuredLead.featuredMedia?.url && <img src={withBase(featuredLead.featuredMedia.url)} alt={featuredLead.title} width="700" height="450" />}
+          <div>
+            <span>{featuredLead.category}</span>
+            <h3>{featuredLead.title}</h3>
+            <p>{clip(featuredLead.excerpt || featuredLead.plainText, 220)}</p>
+          </div>
+        </a>
+        <div class="compact-list">
+          {featuredRest.map((post) => (
+            <a href={withBase(post.path)}>
+              <span>{post.category}</span>
+              <strong>{post.title}</strong>
+              <small>{formatDate(post.date)}</small>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {categorySections.map((cat) => {
+    const items = postsByCategory(cat.slug, 3);
+    if (!items.length) return null;
+    return (
+      <section class="section category-section">
+        <div class="container">
+          <div class="section-head">
+            <div><p class="eyebrow">{cat.intro}</p><h2 class="section-title">{cat.title}</h2></div>
+            <a class="btn btn-outline" href={withBase(`/categoria/${cat.slug}/`)}>{cat.cta || 'Ver categoría'}</a>
+          </div>
+          <div class="post-grid">
+            {items.map((post) => <PostCard post={post} />)}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+</BaseLayout>
+
+<style>
+  .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 50px; align-items: center; max-width: 1180px; margin: 24px auto 0; padding: 0 20px; }
+  .hero-copy .hero-sub { margin: 18px 0 28px; max-width: 480px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+  .hero-copy h1 { margin: 0; max-width: 560px; font: 700 clamp(2.2rem, 4vw, 3.4rem)/1.08 var(--font-display); letter-spacing: -0.045em; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-feature { position: relative; display: block; overflow: hidden; border-radius: 22px; min-height: 380px; color: #fff; box-shadow: var(--shadow-lg); }
+  .hero-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-feature::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(15, 14, 14, 0.88)); }
+  .hero-feature-body { position: relative; z-index: 2; padding: 24px; }
+  .hero-feature-body span { display: inline-block; margin-bottom: 8px; padding: 4px 9px; border-radius: 999px; background: rgba(255, 255, 255, 0.16); font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .hero-feature-body strong { display: block; font: 600 20px/1.3 var(--font-display); }
+  .hero-feature-body small { display: block; margin-top: 8px; color: rgba(255, 255, 255, 0.7); font-size: 12px; }
+
+  .intro-stats { padding: 56px 0; }
+  .intro-grid { display: grid; grid-template-columns: repeat(3, auto) 1fr; gap: 32px; align-items: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 32px 0; }
+  .intro-grid strong { display: block; font: 700 30px var(--font-display); }
+  .intro-grid span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .intro-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+
+  .service-strip-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 28px; }
+  .service-strip-grid a { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: #fff; transition: 0.2s ease; }
+  .service-strip-grid a:hover { border-color: var(--red); transform: translateY(-2px); }
+  .service-strip-grid span { display: block; font: 700 14px var(--font-display); }
+  .service-strip-grid small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+
+  .home-decision { background: var(--surface-secondary); }
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 34px; }
+  .decision-card { min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+  .decision-card .btn { white-space: normal; text-align: center; }
+  .decision-card.premium { border-color: rgba(196, 30, 30, 0.35); box-shadow: 0 18px 45px rgba(196, 30, 30, 0.1); }
+  .decision-card small { color: var(--red); font: 700 10px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .decision-card h3 { margin: 8px 0 18px; font: 700 20px var(--font-display); }
+  .decision-card ul { display: grid; gap: 10px; margin: 0 0 22px; padding: 18px 0 0; border-top: 1px solid var(--line); list-style: none; }
+  .decision-card li { padding-left: 18px; position: relative; color: var(--muted); font-size: 13px; }
+  .decision-card li::before { content: '·'; position: absolute; left: 0; color: var(--red); font-weight: 800; }
+
+  .lead-card { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+  .lead-card img { width: 100%; height: 280px; object-fit: cover; }
+  .lead-card > div { padding: 22px; }
+  .lead-card span { color: var(--red); font: 700 10px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+  .lead-card h3 { margin: 10px 0; font: 700 22px/1.3 var(--font-display); }
+  .lead-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .featured-layout { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 22px; }
+  .compact-list { display: grid; gap: 14px; }
+  .compact-list a { display: block; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+  .compact-list span { color: var(--red); font: 700 9px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+  .compact-list strong { display: block; margin: 6px 0; font: 600 14px/1.35 var(--font-display); }
+  .compact-list small { color: var(--muted); font-size: 11px; }
+
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  @media (max-width: 980px) {
+    .hero { grid-template-columns: 1fr; }
+    .service-strip-grid { grid-template-columns: repeat(2, 1fr); }
+    .decision-grid { grid-template-columns: 1fr; }
+    .featured-layout { grid-template-columns: 1fr; }
+    .post-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 680px) {
+    .intro-grid { grid-template-columns: 1fr 1fr; }
+    .intro-grid p { grid-column: 1 / -1; }
+    .service-strip-grid { grid-template-columns: 1fr; }
+    .post-grid { grid-template-columns: 1fr; }
+    .section-head { display: block; }
+    .section-head .btn { margin-top: 16px; }
+  }
+</style>
