@@ -1,0 +1,35 @@
+/*
+  Same palette as automotor-prototipo (Plaquéalo) so the two sites read as
+  one family — this is the whole point of today's migration, not a
+  coincidence. Rojo #C41E1E, negro #151515, blanco cálido #F7F5F2.
+*/
+:root {
+  --red: #c41e1e;
+  --red-dark: #a11717;
+  --red-light: #fff0ee;
+  --ink: #151515;
+  --paper: #f7f5f2;
+  --surface: #fffdfa;
+  --surface-secondary: #f0ece7;
+  --muted: #6d6d6d;
+  --muted-2: #8b898e;
+  --line: #e8e8e8;
+  --blue: #3468a8;
+  --green: #1f8a4c;
+  --amber: #b56f09;
+  --danger: #b42318;
+
+  --shadow-soft: 0 12px 35px rgba(21, 21, 21, 0.08);
+  --shadow-lg: 0 18px 50px rgba(21, 21, 21, 0.09);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  --container-max: 1180px;
+
+  --font-display: Sora, Inter, system-ui, sans-serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}

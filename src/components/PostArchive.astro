@@ -1,0 +1,65 @@
+---
+import PostCard from './PostCard.astro';
+import { withBase } from '../utils/url';
+import { activeCategories, type ContentEntry } from '../data/content';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  items: ContentEntry[];
+  page: number;
+  totalPages: number;
+  baseRoute: string;
+}
+const { title, subtitle, items, page, totalPages, baseRoute } = Astro.props;
+
+const prevHref = page > 1 ? `${baseRoute}/page/${page - 1}/` : null;
+const nextHref = page < totalPages ? `${baseRoute}/page/${page + 1}/` : null;
+---
+
+<section class="section archive">
+  <div class="container">
+    <header class="page-head">
+      <a href={withBase('/')}>Automotor.pe</a>
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+    </header>
+    <nav class="category-nav" aria-label="Categorías">
+      <a href={withBase('/archivo/')}>Todo</a>
+      {activeCategories.map((cat) => <a href={withBase(`/categoria/${cat.slug}/`)}>{cat.name} ({cat.count})</a>)}
+    </nav>
+    {items.length > 0 ? (
+      <div class="post-grid">{items.map((post) => <PostCard post={post} />)}</div>
+    ) : (
+      <p class="archive-empty">No hay artículos en esta sección todavía.</p>
+    )}
+    <nav class="pager" aria-label="Paginación de artículos">
+      {prevHref ? <a href={withBase(prevHref)}>← Entradas recientes</a> : <span />}
+      <strong>Página {page} de {totalPages}</strong>
+      {nextHref ? <a href={withBase(nextHref)}>Entradas más antiguas →</a> : <span />}
+    </nav>
+  </div>
+</section>
+
+<style>
+  .page-head a { color: var(--red); font: 700 12px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+  .page-head h1 { margin: 14px 0 0; font: 700 clamp(1.9rem, 3.6vw, 2.8rem)/1.1 var(--font-display); letter-spacing: -0.03em; }
+  .page-head p { margin: 10px 0 0; color: var(--muted); }
+
+  .category-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 30px 0 34px; }
+  .category-nav a { padding: 9px 15px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .category-nav a:hover { border-color: var(--ink); color: var(--ink); }
+
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .archive-empty { padding: 40px; border: 1px dashed var(--line); border-radius: 16px; text-align: center; color: var(--muted); }
+
+  .pager { display: flex; align-items: center; justify-content: space-between; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .pager a { color: var(--red); font-weight: 700; font-size: 14px; }
+  .pager strong { color: var(--muted); font-size: 12px; font-weight: 600; }
+
+  @media (max-width: 980px) { .post-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 680px) {
+    .post-grid { grid-template-columns: 1fr; }
+    .pager { flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
