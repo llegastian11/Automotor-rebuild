@@ -1,0 +1,129 @@
+---
+import { withBase } from '../utils/url';
+
+interface Props {
+  id: string;
+  label?: string;
+  placeholder?: string;
+  initialValue?: string;
+  redirectTo?: string;
+  helpText?: string;
+  submitLabel?: string;
+}
+
+const {
+  id,
+  label = 'Ingresa la placa del vehículo',
+  placeholder = 'ABC-123',
+  initialValue = '',
+  redirectTo = '/plaquealo/',
+  helpText = 'Consulta inicial sin costo · Tus datos están protegidos',
+  submitLabel = 'Consultar placa',
+} = Astro.props;
+
+// redirectTo may be an absolute URL to the sibling Plaquéalo site
+// (see data/company.ts) — only relative paths get the local base prefix.
+const redirectHref = /^https?:\/\//.test(redirectTo) ? redirectTo : withBase(redirectTo);
+---
+
+<form class="plate-form" data-redirect-to={redirectHref} novalidate>
+  <label class="plate-label" for={`${id}Input`}>{label}</label>
+  <div class="plate">
+    <div class="plate-country" aria-hidden="true">
+      <span class="flag"><i></i><i></i><i></i></span>
+      <strong>PERÚ</strong>
+    </div>
+    <input
+      id={`${id}Input`}
+      class="plate-input"
+      maxlength="8"
+      value={initialValue}
+      placeholder={placeholder}
+      autocomplete="off"
+      spellcheck="false"
+      aria-describedby={`${id}Help`}
+      aria-label="Número de placa"
+    />
+    <button class="plate-submit" type="submit" aria-label={submitLabel}>
+      <span>{submitLabel}</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>
+    </button>
+  </div>
+  <p class="plate-note" id={`${id}Help`}>
+    {helpText} <span class="plate-status" data-status>{initialValue ? `Placa ${initialValue} lista para consultar.` : ''}</span>
+  </p>
+</form>
+
+<style>
+  .plate-label { display: block; margin-bottom: 10px; font-size: 13px; font-weight: 700; }
+  .plate {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr) 142px;
+    width: 100%;
+    height: 66px;
+    overflow: hidden;
+    border: 1.5px solid var(--ink);
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 16px 34px rgba(23, 23, 25, 0.09);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .plate:focus-within { border-color: var(--red); box-shadow: 0 0 0 4px rgba(196, 30, 30, 0.1), 0 15px 34px rgba(23, 23, 25, 0.09); transform: translateY(-1px); }
+  .plate-country { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 8px; }
+  .flag { display: grid; grid-template-columns: repeat(3, 1fr); width: 27px; height: 17px; margin-bottom: 4px; overflow: hidden; }
+  .flag i:nth-child(1), .flag i:nth-child(3) { background: #d92337; }
+  .flag i:nth-child(2) { background: #fff; }
+  .plate-country strong { font-size: 8px; letter-spacing: 0.09em; }
+  .plate-input {
+    min-width: 0; width: 100%; border: 0; background: transparent; text-align: center;
+    font: 700 2rem/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; outline: 0;
+  }
+  .plate-submit {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    border: 0; background: var(--red); color: #fff; font-size: 13px; font-weight: 750; cursor: pointer;
+    transition: background-color 0.18s ease;
+  }
+  .plate-submit:hover { background: var(--red-dark); }
+  .plate-submit svg { width: 18px; }
+  .plate-note { min-height: 20px; margin: 10px 0 0; color: #858489; font-size: 12px; line-height: 1.7; }
+  .plate-status { display: block; font-weight: 700; }
+  .plate-status.valid { color: var(--green); }
+  .plate-status.error { color: var(--danger); }
+
+  @media (max-width: 680px) {
+    .plate { grid-template-columns: 54px minmax(0, 1fr) 58px; height: 66px; }
+    .plate-input { font-size: clamp(1.35rem, 7.2vw, 1.8rem); letter-spacing: 0.07em; }
+    .plate-submit span { display: none; }
+  }
+</style>
+
+<script>
+  const sanitizePlate = (value: string) => value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 8);
+  const isValid = (value: string) => value.replace('-', '').length >= 6;
+
+  document.querySelectorAll<HTMLFormElement>('.plate-form').forEach((form) => {
+    const input = form.querySelector<HTMLInputElement>('.plate-input');
+    const status = form.querySelector<HTMLElement>('[data-status]');
+    if (!input || !status) return;
+
+    input.addEventListener('input', () => {
+      input.value = sanitizePlate(input.value);
+      const valid = isValid(input.value);
+      status.textContent = input.value ? (valid ? `Placa ${input.value} lista para consultar.` : 'Ingresa una placa peruana válida.') : '';
+      status.className = `plate-status${input.value ? (valid ? ' valid' : ' error') : ''}`;
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = sanitizePlate(input.value);
+      if (!isValid(value)) {
+        status.textContent = 'Ingresa una placa peruana válida.';
+        status.className = 'plate-status error';
+        input.focus();
+        return;
+      }
+      const redirectTo = form.dataset.redirectTo || '/plaquealo/';
+      window.location.href = `${redirectTo}?placa=${encodeURIComponent(value)}`;
+    });
+  });
+</script>

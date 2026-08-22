@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
+import PlateForm from '../components/PlateForm.astro';
 import { withBase } from '../utils/url';
 import { company } from '../data/company';
 import { site, posts, formatDate, clip, postsByCategory } from '../data/content';
 
-const lead = posts[0];
 const [featuredLead, ...featuredRest] = posts.slice(0, 5);
 
 const serviceLinks = [
@@ -37,14 +37,14 @@ const categorySections = [
         <a class="btn btn-outline" href={withBase('/consulta-vehicular/')}>Consulta vehicular</a>
       </div>
     </div>
-    <a class="hero-feature" href={withBase(lead.path)}>
-      {lead.featuredMedia?.url && <img src={withBase(lead.featuredMedia.url)} alt={lead.title} width="600" height="400" />}
-      <div class="hero-feature-body">
-        <span>{lead.category}</span>
-        <strong>{lead.title}</strong>
-        <small>{formatDate(lead.date)}</small>
+    <div class="hero-plate-card">
+      <p class="official-badge"><span aria-hidden="true">✓</span> Información de SUNARP, SAT, SOAT y MTC</p>
+      <PlateForm id="homePlate" initialValue="B5K110" redirectTo={company.plaquealo.plaquealoUrl} />
+      <div class="hero-plate-stats" aria-label="Características de la consulta">
+        <div><span>Fuentes consultadas</span><strong>25</strong></div>
+        <div><span>Consulta digital</span><strong>100%</strong></div>
       </div>
-    </a>
+    </div>
   </section>
 
   <section class="section intro-stats">
@@ -153,13 +153,20 @@ const categorySections = [
   .hero-copy .hero-sub { margin: 18px 0 28px; max-width: 480px; color: var(--muted); font-size: 16px; line-height: 1.65; }
   .hero-copy h1 { margin: 0; max-width: 560px; font: 700 clamp(2.2rem, 4vw, 3.4rem)/1.08 var(--font-display); letter-spacing: -0.045em; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .hero-feature { position: relative; display: block; overflow: hidden; border-radius: 22px; min-height: 380px; color: #fff; box-shadow: var(--shadow-lg); }
-  .hero-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .hero-feature::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(15, 14, 14, 0.88)); }
-  .hero-feature-body { position: relative; z-index: 2; padding: 24px; }
-  .hero-feature-body span { display: inline-block; margin-bottom: 8px; padding: 4px 9px; border-radius: 999px; background: rgba(255, 255, 255, 0.16); font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-  .hero-feature-body strong { display: block; font: 600 20px/1.3 var(--font-display); }
-  .hero-feature-body small { display: block; margin-top: 8px; color: rgba(255, 255, 255, 0.7); font-size: 12px; }
+
+  .hero-plate-card { padding: 30px 32px 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-lg); }
+  .hero-plate-card .official-badge {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px; padding: 8px 11px;
+    border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 253, 250, 0.82);
+    color: var(--muted); font-size: 10px; font-weight: 700;
+  }
+  .hero-plate-card .official-badge span { display: grid; width: 16px; height: 16px; place-items: center; border-radius: 50%; background: #e8f6ed; color: var(--green); font-size: 10px; }
+  .hero-plate-stats { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .hero-plate-stats div { padding: 0 16px; }
+  .hero-plate-stats div:first-child { padding-left: 0; }
+  .hero-plate-stats div + div { border-left: 1px solid var(--line); }
+  .hero-plate-stats span { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; }
+  .hero-plate-stats strong { display: block; font: 700 17px var(--font-display); }
 
   .intro-stats { padding: 56px 0; }
   .intro-grid { display: grid; grid-template-columns: repeat(3, auto) 1fr; gap: 32px; align-items: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 32px 0; }
