@@ -4,19 +4,11 @@ import { withBase } from '../utils/url';
 import { company } from '../data/company';
 import { serviceNav } from '../data/services';
 
-// Temporarily hidden per request (2026-08-21): "Consulta vehicular" and
-// "Vehículos" are going to be integrated differently later, so they stay in
-// this list (not deleted) with `hidden: true` — flip it back to bring them
-// back into the header.
 const crossLinks = [
   { href: company.plaquealo.plaquealoUrl, label: 'Plaquealo', emphasis: true },
-  { href: '/consulta-vehicular/', label: 'Consulta vehicular', local: true, hidden: true },
-  { href: company.plaquealo.vehiculosUrl, label: 'Vehículos', hidden: true },
+  { href: '/consulta-vehicular/', label: 'Consulta vehicular', local: true },
+  { href: company.plaquealo.vehiculosUrl, label: 'Vehículos' },
 ];
-const visibleCrossLinks = crossLinks.filter((link) => !link.hidden);
-
-// Same: hidden for now rather than removed, per the same request.
-const showPublishButton = false;
 
 const blogLinks = [
   { label: 'Lanzamientos', href: '/lanzamientos/', hint: 'Novedades del mercado' },
@@ -30,7 +22,7 @@ const megaGroups = ['Consulta y documentos', 'Protección y seguridad'];
 <header class="header">
   <Brand href={withBase('/')} />
   <nav class="desktop-nav" aria-label="Navegación principal">
-    {visibleCrossLinks.map((link) => (
+    {crossLinks.map((link) => (
       <a class:list={{ 'nav-plaquealo': link.emphasis }} href={link.local ? withBase(link.href) : link.href}>{link.label}</a>
     ))}
     <div class="nav-item services-menu">
@@ -68,9 +60,7 @@ const megaGroups = ['Consulta y documentos', 'Protección y seguridad'];
     </div>
   </nav>
   <div class="header-actions">
-    {showPublishButton && (
-      <button class="header-publish publish-open" type="button"><span>Publicar vehículo</span><b>+</b></button>
-    )}
+    <button class="header-publish publish-open" type="button"><span>Publicar vehículo</span><b>+</b></button>
   </div>
   <button class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-drawer"><span></span><span></span></button>
 </header>
@@ -82,7 +72,7 @@ const megaGroups = ['Consulta y documentos', 'Protección y seguridad'];
     <button class="mobile-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button>
   </div>
   <nav class="mobile-links">
-    {visibleCrossLinks.map((link) => (
+    {crossLinks.map((link) => (
       <a class:list={{ 'mobile-plaquealo': link.emphasis }} href={link.local ? withBase(link.href) : link.href}>{link.label}</a>
     ))}
     <p>Otros servicios</p>
@@ -91,9 +81,7 @@ const megaGroups = ['Consulta y documentos', 'Protección y seguridad'];
     {blogLinks.map((link) => <a href={withBase(link.href)}>{link.label}</a>)}
   </nav>
   <div class="mobile-drawer-actions">
-    {showPublishButton && (
-      <button class="btn btn-red publish-open" type="button">Publicar vehículo</button>
-    )}
+    <button class="btn btn-red publish-open" type="button">Publicar vehículo</button>
   </div>
 </aside>
 
