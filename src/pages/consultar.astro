@@ -10,12 +10,21 @@ import { withBase } from '../utils/url';
 >
   <section class="section decide">
     <div class="container">
-      <p class="eyebrow">Antes de continuar</p>
-      <h1 class="section-title">¿Cómo quieres consultar <span id="decidePlate">esta placa</span>?</h1>
-      <p class="section-copy">Elige la opción que se ajuste a lo que necesitas.</p>
+      <p class="eyebrow reveal" style="--d:0s">Antes de continuar</p>
+      <div class="plate-chip reveal" style="--d:.06s">
+        <span class="plate-chip-flag"><i></i><i></i><i></i></span>
+        <span>Estás consultando</span>
+        <strong id="decidePlateChip">tu placa</strong>
+      </div>
+      <h1 class="section-title reveal" style="--d:.12s">¿Cómo quieres continuar?</h1>
+      <p class="section-copy reveal" style="--d:.18s">Elige la opción que se ajuste a lo que necesitas.</p>
+
       <div class="decision-grid">
-        <article class="decision-card">
-          <div><small>Opción 1</small><h2>Consulta vehicular</h2></div>
+        <article class="decision-card reveal" style="--d:.26s">
+          <div class="decision-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.5"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07L12.5 19.5"/></svg>
+          </div>
+          <div><small>Opción 1 · Gratis</small><h2>Consulta vehicular</h2></div>
           <ul>
             <li>Revisas cada fuente oficial, link por link.</li>
             <li>Necesitas crear accesos en algunas páginas.</li>
@@ -24,16 +33,26 @@ import { withBase } from '../utils/url';
           </ul>
           <a class="btn btn-outline" id="decideConsultaLink" href={withBase('/consulta-vehicular/')}>Ir a consulta vehicular</a>
         </article>
-        <article class="decision-card premium">
-          <div><small>Opción 2</small><h2>Plaquéalo</h2></div>
+
+        <article class="decision-card premium reveal" style="--d:.34s">
+          <span class="decision-badge">La más elegida</span>
+          <div class="decision-icon premium">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
+          </div>
+          <div><small>Opción 2 · Pagado</small><h2>Plaquéalo</h2></div>
           <ul>
             <li>Todo consolidado en un solo reporte.</li>
             <li>Listo en 2 minutos.</li>
             <li>Formato visual y fácil de leer.</li>
-            <li>Servicio pagado.</li>
+            <li>Se abre en una pestaña nueva.</li>
           </ul>
-          <a class="btn btn-red" id="decidePlaquealoLink" href={company.plaquealo.plaquealoUrl}>Continuar con Plaquéalo</a>
+          <a class="btn btn-red" id="decidePlaquealoLink" href={company.plaquealo.plaquealoUrl} target="_blank" rel="noopener noreferrer">
+            Continuar con Plaquéalo
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+          </a>
         </article>
+
+        <div class="decision-or" aria-hidden="true">o</div>
       </div>
     </div>
   </section>
@@ -42,32 +61,94 @@ import { withBase } from '../utils/url';
 <style>
   .decide .section-title { max-width: 700px; }
   .decide .section-copy { margin-top: 14px; max-width: 560px; color: var(--muted); }
-  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
-  .decision-card { min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
-  .decision-card .btn { display: block; width: 100%; margin-top: 22px; text-align: center; white-space: normal; }
+
+  .plate-chip {
+    display: inline-flex; align-items: center; gap: 9px; margin: 22px 0 18px; padding: 7px 14px 7px 8px;
+    border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 12px; color: var(--muted);
+  }
+  .plate-chip-flag { display: grid; grid-template-columns: repeat(3, 1fr); width: 20px; height: 13px; overflow: hidden; border-radius: 3px; }
+  .plate-chip-flag i:nth-child(1), .plate-chip-flag i:nth-child(3) { background: #d92337; }
+  .plate-chip-flag i:nth-child(2) { background: #fff; }
+  .plate-chip strong { font: 700 13px var(--font-mono); letter-spacing: 0.08em; color: var(--ink); }
+
+  .decision-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+  .decision-or {
+    position: absolute; top: 50%; left: 50%; z-index: 2;
+    display: grid; width: 34px; height: 34px; place-items: center;
+    transform: translate(-50%, -50%); border: 1px solid var(--line); border-radius: 50%;
+    background: var(--paper); color: var(--muted); font: 700 12px var(--font-display);
+    box-shadow: 0 6px 16px rgba(23, 23, 25, 0.08);
+  }
+
+  .decision-card {
+    position: relative; min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: #fff;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+  .decision-card:hover { transform: translateY(-5px); box-shadow: 0 22px 44px rgba(23, 23, 25, 0.1); border-color: #d8d3cd; }
+  .decision-card.premium:hover { border-color: rgba(196, 30, 30, 0.5); box-shadow: 0 24px 50px rgba(196, 30, 30, 0.16); }
+  .decision-card .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 22px; text-align: center; white-space: normal; }
   .decision-card.premium { border-color: rgba(196, 30, 30, 0.35); box-shadow: 0 18px 45px rgba(196, 30, 30, 0.1); }
+  /* Higher specificity than .reveal so both the entrance animation and the
+     ambient glow run together instead of one shorthand clobbering the other. */
+  .decision-card.premium.reveal {
+    animation: revealUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards, glow 3.2s ease-in-out infinite;
+    animation-delay: var(--d, 0s), 1s;
+  }
   .decision-card small { color: var(--red); font: 700 10px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
   .decision-card h2 { margin: 8px 0 18px; font: 700 20px var(--font-display); }
   .decision-card ul { display: grid; gap: 10px; margin: 0; padding: 18px 0 0; border-top: 1px solid var(--line); list-style: none; }
   .decision-card li { padding-left: 18px; position: relative; color: var(--muted); font-size: 13px; }
   .decision-card li::before { content: '·'; position: absolute; left: 0; color: var(--red); font-weight: 800; }
 
+  .decision-icon {
+    display: grid; width: 42px; height: 42px; margin-bottom: 16px; place-items: center;
+    border-radius: 12px; background: var(--surface-secondary); color: var(--ink);
+    transition: transform 0.22s ease;
+  }
+  .decision-icon svg { width: 20px; }
+  .decision-icon.premium { background: var(--red-light); color: var(--red); }
+  .decision-card:hover .decision-icon { transform: scale(1.08) rotate(-4deg); }
+
+  .decision-badge {
+    position: absolute; top: -12px; right: 22px; padding: 5px 11px;
+    border-radius: 999px; background: var(--red); color: #fff; font-size: 10px; font-weight: 800;
+    letter-spacing: 0.04em; box-shadow: 0 8px 18px rgba(196, 30, 30, 0.25);
+  }
+
+  .ext-icon { width: 14px; flex-shrink: 0; }
+
+  .reveal { opacity: 0; transform: translateY(16px); animation: revealUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation-delay: var(--d, 0s); }
+  @keyframes revealUp { to { opacity: 1; transform: none; } }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 18px 45px rgba(196, 30, 30, 0.1); }
+    50% { box-shadow: 0 18px 50px rgba(196, 30, 30, 0.22); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; animation: none; }
+    .decision-card.premium { animation: none; }
+    .decision-card, .decision-icon { transition: none; }
+  }
+
   @media (max-width: 680px) {
     .decision-grid { grid-template-columns: 1fr; }
+    .decision-or { display: none; }
   }
 </style>
 
 <script>
   const params = new URLSearchParams(window.location.search);
   const plate = params.get('placa');
+  const chip = document.getElementById('decidePlateChip');
   if (plate) {
-    const label = document.getElementById('decidePlate');
-    if (label) label.textContent = `la placa ${plate}`;
+    if (chip) chip.textContent = plate;
 
     const consultaLink = document.getElementById('decideConsultaLink') as HTMLAnchorElement | null;
     if (consultaLink) consultaLink.href = `${consultaLink.href}?placa=${encodeURIComponent(plate)}`;
 
     const plaquealoLink = document.getElementById('decidePlaquealoLink') as HTMLAnchorElement | null;
     if (plaquealoLink) plaquealoLink.href = `${plaquealoLink.href}?placa=${encodeURIComponent(plate)}`;
+  } else if (chip) {
+    chip.closest('.plate-chip')?.remove();
   }
 </script>
