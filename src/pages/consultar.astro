@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { company } from '../data/company';
+import { withBase } from '../utils/url';
+---
+
+<BaseLayout
+  title="¿Cómo quieres consultar tu placa? | Automotor.pe"
+  description="Elige entre revisar las fuentes oficiales por tu cuenta o generar un reporte consolidado con Plaquéalo."
+>
+  <section class="section decide">
+    <div class="container">
+      <p class="eyebrow">Antes de continuar</p>
+      <h1 class="section-title">¿Cómo quieres consultar <span id="decidePlate">esta placa</span>?</h1>
+      <p class="section-copy">Elige la opción que se ajuste a lo que necesitas.</p>
+      <div class="decision-grid">
+        <article class="decision-card">
+          <div><small>Opción 1</small><h2>Consulta vehicular</h2></div>
+          <ul>
+            <li>Revisas cada fuente oficial, link por link.</li>
+            <li>Necesitas crear accesos en algunas páginas.</li>
+            <li>Demora entre 20 y 30 minutos si es tu primera vez.</li>
+            <li>Sin costo.</li>
+          </ul>
+          <a class="btn btn-outline" id="decideConsultaLink" href={withBase('/consulta-vehicular/')}>Ir a consulta vehicular</a>
+        </article>
+        <article class="decision-card premium">
+          <div><small>Opción 2</small><h2>Plaquéalo</h2></div>
+          <ul>
+            <li>Todo consolidado en un solo reporte.</li>
+            <li>Listo en 2 minutos.</li>
+            <li>Formato visual y fácil de leer.</li>
+            <li>Servicio pagado.</li>
+          </ul>
+          <a class="btn btn-red" id="decidePlaquealoLink" href={company.plaquealo.plaquealoUrl}>Continuar con Plaquéalo</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .decide .section-title { max-width: 700px; }
+  .decide .section-copy { margin-top: 14px; max-width: 560px; color: var(--muted); }
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+  .decision-card { min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+  .decision-card .btn { display: block; width: 100%; margin-top: 22px; text-align: center; white-space: normal; }
+  .decision-card.premium { border-color: rgba(196, 30, 30, 0.35); box-shadow: 0 18px 45px rgba(196, 30, 30, 0.1); }
+  .decision-card small { color: var(--red); font: 700 10px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .decision-card h2 { margin: 8px 0 18px; font: 700 20px var(--font-display); }
+  .decision-card ul { display: grid; gap: 10px; margin: 0; padding: 18px 0 0; border-top: 1px solid var(--line); list-style: none; }
+  .decision-card li { padding-left: 18px; position: relative; color: var(--muted); font-size: 13px; }
+  .decision-card li::before { content: '·'; position: absolute; left: 0; color: var(--red); font-weight: 800; }
+
+  @media (max-width: 680px) {
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const plate = params.get('placa');
+  if (plate) {
+    const label = document.getElementById('decidePlate');
+    if (label) label.textContent = `la placa ${plate}`;
+
+    const consultaLink = document.getElementById('decideConsultaLink') as HTMLAnchorElement | null;
+    if (consultaLink) consultaLink.href = `${consultaLink.href}?placa=${encodeURIComponent(plate)}`;
+
+    const plaquealoLink = document.getElementById('decidePlaquealoLink') as HTMLAnchorElement | null;
+    if (plaquealoLink) plaquealoLink.href = `${plaquealoLink.href}?placa=${encodeURIComponent(plate)}`;
+  }
+</script>
